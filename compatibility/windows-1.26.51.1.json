@@ -1,0 +1,25 @@
+{
+  "platform": "windows-x86_64",
+  "endstone": "0.11.11",
+  "python_abi": "cp314",
+  "bds": "1.26.51.1",
+  "network_protocol": 2193,
+  "bds_exe_sha256": "76d547f82e02c18d0986c30b47132c9cc4171d0f2df1c00649e50ff35788b321",
+  "endstone_runtime_sha256": "81f0279301dc5b10e8c10b71c61c6eeb2ea04a8c0783399d6377a881cc86da9e",
+  "bds_rva": {
+    "chunk_view_update": "0x9e78b0",
+    "chunk_view_source_copy": "0x9e8d00",
+    "chunk_grid_destructor": "0xa15f60",
+    "main_get_existing": "0x38dd630",
+    "main_create_new": "0x38dd980",
+    "get_or_load": "0x9e4900",
+    "dispatch_pending_chunk_tasks": "0x9ddb10",
+    "level_get_ticking_offsets": "0x7db1b0",
+    "main_chunk_source_vtable": "0xa80d090",
+    "chunk_view_source_vtable": "0xa71a330"
+  },
+  "runtime_rva": {
+    "dimension_get_handle": "0x11ed00",
+    "level_get_handle": "0x6d7b0"
+  }
+}

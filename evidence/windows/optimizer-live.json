@@ -1,0 +1,126 @@
+{
+  "passed": 22,
+  "checks": [
+    {
+      "test": "one player at origin",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "outside radius evicted inside vanilla radius four",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "center and radius boundary retained",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "manual pin outside radius preserved",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "manual deny inside radius preserved",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "evicted chunk stays absent",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "simulation radius one active",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "retained center continues ticking",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "temporary rules absent from saved policy",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "keep radius one unloads chunk two",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "increasing radius restores its new boundary",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "movement restores new occupied chunk",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "movement cleanup removes old player area",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "cleanup preserves saved blocks",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "negative coordinates use floor chunk division",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "disable releases temporary restrictions",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "disable preserves manual deny and pin",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "disable restores manual radius",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "timer triggers real native eviction",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "TPS-only trigger uses real server TPS",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "invalid settings rejected without mutation",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "config reload retains settings",
+      "passed": true,
+      "detail": null
+    }
+  ],
+  "final_config": {
+    "batch_size": 32,
+    "cleanup_interval_seconds": 30,
+    "enabled": true,
+    "keep_radius": 2,
+    "low_tps_seconds": 5,
+    "schema": 1,
+    "simulation_radius": 2,
+    "tps_cooldown_seconds": 30,
+    "tps_threshold": 18
+  }
+}

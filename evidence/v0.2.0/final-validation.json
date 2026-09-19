@@ -1,0 +1,108 @@
+{
+  "date_utc": "2026-09-19T22:00:42.118553+00:00",
+  "worldchunks_version": "0.2.0",
+  "optimizer_version": "0.1.0",
+  "endstone": "0.11.11",
+  "bds": "1.26.51.1",
+  "python_abi": "cp314",
+  "platform": "Linux x86_64 / Docker on Windows",
+  "plugin_sha256": "cb31b9c437010fd9c0b6a0de8778bc748097d73675dcdd7f699c9dbb999cfdd9",
+  "optimizer_sha256": "db1e167c30e89b32fcda8f19ad3b16054ec3726a4f68376f7251b9b5a5416d27",
+  "automated_checks": {
+    "live-regression.json": 21,
+    "optimizer-live.json": 22,
+    "optimizer-empty.json": 4,
+    "optimizer-restart.json": 4,
+    "optimizer-tps-stress.json": 2,
+    "optimizer_policy.cpp": 20
+  },
+  "total_automated_checks": 73,
+  "additional_checks": {
+    "clean_shutdown_with_both_plugins": true,
+    "minecraft_rejoined_after_restart": true,
+    "kernel_cpu_quota_unlimited": true
+  },
+  "final_native_status": {
+    "blocked_requests": 9509,
+    "constructed_views": 6,
+    "denied": 0,
+    "dimensions": [
+      {
+        "loaded": 25,
+        "name": "Overworld"
+      },
+      {
+        "loaded": 0,
+        "name": "Nether"
+      },
+      {
+        "loaded": 0,
+        "name": "TheEnd"
+      }
+    ],
+    "effective_radius_cap": 2,
+    "effective_tick_offsets": 25,
+    "native": true,
+    "optimizer_denied": 278,
+    "optimizer_enabled": true,
+    "pending_generation": 0,
+    "pins": 0,
+    "released_view_references": 1410,
+    "simulation_radius_cap": 2,
+    "spawn_grace_ticks": 0,
+    "spawn_pending": false,
+    "tracked_views": 3
+  },
+  "final_policy": {
+    "denied": [],
+    "pins": [],
+    "schema": 1,
+    "simulation_radius_cap": 2
+  },
+  "final_optimizer_status": {
+    "config": {
+      "batch_size": 32,
+      "cleanup_interval_seconds": 30,
+      "enabled": true,
+      "keep_radius": 2,
+      "low_tps_seconds": 5,
+      "schema": 1,
+      "simulation_radius": 2,
+      "tps_cooldown_seconds": 30,
+      "tps_threshold": 18
+    },
+    "interval_triggers": 0,
+    "native": {
+      "api": 1,
+      "batch_size": 32,
+      "chunks_marked": 556,
+      "chunks_skipped": 0,
+      "cleanup_requested": false,
+      "cleanup_runs": 2,
+      "effective_simulation_radius": 2,
+      "enabled": true,
+      "grace_ticks": 0,
+      "keep_radius": 2,
+      "last_reason": "manual",
+      "paused_for_players": false,
+      "pending_chunks": 0,
+      "pending_restore": 0,
+      "player_centers": 1,
+      "rule_limit": 65536,
+      "simulation_radius": 2,
+      "temporary_denies": 278,
+      "waiting_for_player_chunks": false
+    },
+    "sampled_tps": 20.0,
+    "tps_source": "Endstone current TPS, sampled once per second",
+    "tps_triggers": 1
+  },
+  "limitations": [
+    "Exact Linux BDS and Endstone runtime hashes required",
+    "Windows native DLL not implemented",
+    "No long-duration or multiple-player soak test",
+    "No comprehensive dimension-transition or terrain-generator testing",
+    "Cleanup is not a guarantee of TPS improvement"
+  ],
+  "historical_validation": "evidence/v0.1.0/final-validation.json"
+}

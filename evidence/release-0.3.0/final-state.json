@@ -1,0 +1,77 @@
+{
+  "version": "0.3.0",
+  "one_player_loaded_chunks": 25,
+  "native": {
+    "blocked_requests": 30809,
+    "constructed_views": 16,
+    "denied": 0,
+    "dimensions": [
+      {
+        "loaded": 25,
+        "name": "Overworld"
+      },
+      {
+        "loaded": 0,
+        "name": "Nether"
+      },
+      {
+        "loaded": 0,
+        "name": "TheEnd"
+      }
+    ],
+    "effective_radius_cap": 2,
+    "effective_tick_offsets": 25,
+    "native": true,
+    "optimizer_denied": 374,
+    "optimizer_enabled": true,
+    "pending_generation": 0,
+    "pins": 0,
+    "released_view_references": 8124,
+    "simulation_radius_cap": 2,
+    "spawn_grace_ticks": 0,
+    "spawn_pending": false,
+    "tracked_views": 3
+  },
+  "optimizer": {
+    "config": {
+      "batch_size": 32,
+      "cleanup_interval_seconds": 30,
+      "enabled": true,
+      "keep_radius": 2,
+      "low_tps_seconds": 5,
+      "schema": 1,
+      "simulation_radius": 2,
+      "tps_cooldown_seconds": 30,
+      "tps_threshold": 18
+    },
+    "interval_triggers": 24,
+    "native": {
+      "api": 1,
+      "batch_size": 32,
+      "chunks_marked": 3455,
+      "chunks_skipped": 9,
+      "cleanup_requested": false,
+      "cleanup_runs": 33,
+      "effective_simulation_radius": 2,
+      "enabled": true,
+      "grace_ticks": 0,
+      "keep_radius": 2,
+      "last_reason": "manual",
+      "paused_for_players": false,
+      "pending_chunks": 0,
+      "pending_restore": 0,
+      "player_centers": 1,
+      "rule_limit": 65536,
+      "simulation_radius": 2,
+      "temporary_denies": 374,
+      "waiting_for_player_chunks": false
+    },
+    "sampled_tps": 20.0,
+    "tps_source": "Endstone current TPS, sampled once per second",
+    "tps_triggers": 4
+  },
+  "binary_sha256": {
+    "endstone_worldchunks.so": "d908e9777d5896c120ba897b98e6a306d9d4b461365677f9fddbbf0101a4dd30",
+    "endstone_worldchunks_optimizer.so": "34a700c14a489875556d9debecd198d49e90caed423225b3b7ca21135aa55511"
+  }
+}

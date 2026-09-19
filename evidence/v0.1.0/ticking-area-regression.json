@@ -1,0 +1,35 @@
+{
+  "passed": 6,
+  "checks": [
+    {
+      "test": "no connected players",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "explicit ticking area loads center",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "explicit ticking area center physically absent",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "explicit ticking area cannot reload denied center",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "explicit ticking area reload attempts blocked",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "explicit ticking area restore preserves saved block",
+      "passed": true,
+      "detail": null
+    }
+  ]
+}

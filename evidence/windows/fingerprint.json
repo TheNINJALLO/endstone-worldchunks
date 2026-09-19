@@ -1,0 +1,7 @@
+{
+  "passed": 3,
+  "modified_executable_rejected": true,
+  "commands_refused_native_access": true,
+  "shutdown_clean": true,
+  "original_executable_restored": true
+}

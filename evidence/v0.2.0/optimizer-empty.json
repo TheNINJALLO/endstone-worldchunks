@@ -1,0 +1,25 @@
+{
+  "passed": 4,
+  "checks": [
+    {
+      "test": "no players online",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "no-player cleanup evicts explicit ticking-area chunk",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "no-player cleanup keeps manual pin",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "disable restores explicit ticking-area chunk",
+      "passed": true,
+      "detail": null
+    }
+  ]
+}

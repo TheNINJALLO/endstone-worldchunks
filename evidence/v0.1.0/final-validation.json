@@ -1,0 +1,68 @@
+{
+  "date_utc": "2026-09-19T21:07:08.712572+00:00",
+  "endstone": "0.11.11",
+  "bds": "1.26.51.1",
+  "platform": "Linux x86_64 / Docker on Windows",
+  "python_abi": "cp314",
+  "plugin_sha256": "b79e0431db1a567f4851c0574ec6b91b1be2f817208541a7ae0467956807c287",
+  "automated_checks": {
+    "live-regression.json": 21,
+    "ticking-area-regression.json": 6,
+    "persistence-regression.json": 9
+  },
+  "total_automated_checks": 36,
+  "additional_checks": {
+    "unsupported_binary_rejected": true,
+    "clean_shutdown_with_loaded_pin": true,
+    "clean_shutdown_with_pending_pin_and_online_player": true,
+    "minecraft_rejoined_after_final_restart": true
+  },
+  "client": "Minecraft for Windows 26.51; actual client joined disposable flat world",
+  "limitations": [
+    "Windows native DLL is not implemented",
+    "No long-duration or multiple-player soak test",
+    "No comprehensive Nether/End terrain or dimension-transition testing",
+    "Exact server and runtime hashes required"
+  ],
+  "lab_connection": {
+    "address": "localhost",
+    "tcp_signaling_port": 19142,
+    "udp_transport_port": 19144,
+    "server_identity_persisted": true
+  },
+  "final_lab_status": {
+    "blocked_requests": 1722,
+    "constructed_views": 8,
+    "denied": 0,
+    "dimensions": [
+      {
+        "loaded": 303,
+        "name": "Overworld"
+      },
+      {
+        "loaded": 0,
+        "name": "Nether"
+      },
+      {
+        "loaded": 0,
+        "name": "TheEnd"
+      }
+    ],
+    "effective_radius_cap": 2,
+    "effective_tick_offsets": 25,
+    "native": true,
+    "pending_generation": 0,
+    "pins": 0,
+    "released_view_references": 2,
+    "simulation_radius_cap": 2,
+    "spawn_grace_ticks": 0,
+    "spawn_pending": false,
+    "tracked_views": 3
+  },
+  "final_lab_policy": {
+    "denied": [],
+    "pins": [],
+    "schema": 1,
+    "simulation_radius_cap": 2
+  }
+}

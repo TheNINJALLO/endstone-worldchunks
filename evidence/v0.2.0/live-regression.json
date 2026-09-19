@@ -1,0 +1,334 @@
+{
+  "passed": 21,
+  "checks": [
+    {
+      "test": "one live player",
+      "passed": true,
+      "detail": [
+        {
+          "dimension": "Overworld",
+          "effective_tick_offsets": 25,
+          "native_view_radius": 14,
+          "vanilla_tick_offsets": 57,
+          "view_bounds": [
+            -14,
+            -14,
+            14,
+            14
+          ],
+          "x": 8.5,
+          "y": -60.0,
+          "z": 8.5
+        }
+      ]
+    },
+    {
+      "test": "player at test origin",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "saved radius active after spawning",
+      "passed": true,
+      "detail": {
+        "blocked_requests": 0,
+        "constructed_views": 3,
+        "denied": 0,
+        "dimensions": [
+          {
+            "loaded": 303,
+            "name": "Overworld"
+          },
+          {
+            "loaded": 0,
+            "name": "Nether"
+          },
+          {
+            "loaded": 0,
+            "name": "TheEnd"
+          }
+        ],
+        "effective_radius_cap": 2,
+        "effective_tick_offsets": 25,
+        "native": true,
+        "optimizer_denied": 0,
+        "optimizer_enabled": false,
+        "pending_generation": 0,
+        "pins": 0,
+        "released_view_references": 0,
+        "simulation_radius_cap": 2,
+        "spawn_grace_ticks": 0,
+        "spawn_pending": false,
+        "tracked_views": 3
+      }
+    },
+    {
+      "test": "vanilla radius ticks distant chunk",
+      "passed": true,
+      "detail": [
+        {
+          "denied": false,
+          "dimension": "Overworld",
+          "last_tick": 114577,
+          "optimizer_denied": false,
+          "references": 3,
+          "resident": true,
+          "state": 11,
+          "x": 3,
+          "z": 0
+        },
+        {
+          "denied": false,
+          "dimension": "Overworld",
+          "last_tick": 114601,
+          "optimizer_denied": false,
+          "references": 3,
+          "resident": true,
+          "state": 11,
+          "x": 3,
+          "z": 0
+        }
+      ]
+    },
+    {
+      "test": "radius 2 near chunk ticks",
+      "passed": true,
+      "detail": [
+        {
+          "denied": false,
+          "dimension": "Overworld",
+          "last_tick": 114629,
+          "optimizer_denied": false,
+          "references": 3,
+          "resident": true,
+          "state": 11,
+          "x": 1,
+          "z": 0
+        },
+        {
+          "denied": false,
+          "dimension": "Overworld",
+          "last_tick": 114678,
+          "optimizer_denied": false,
+          "references": 3,
+          "resident": true,
+          "state": 11,
+          "x": 1,
+          "z": 0
+        }
+      ]
+    },
+    {
+      "test": "radius 2 far chunk stays loaded without ticking",
+      "passed": true,
+      "detail": [
+        {
+          "denied": false,
+          "dimension": "Overworld",
+          "last_tick": 114605,
+          "optimizer_denied": false,
+          "references": 3,
+          "resident": true,
+          "state": 11,
+          "x": 3,
+          "z": 0
+        },
+        {
+          "denied": false,
+          "dimension": "Overworld",
+          "last_tick": 114605,
+          "optimizer_denied": false,
+          "references": 3,
+          "resident": true,
+          "state": 11,
+          "x": 3,
+          "z": 0
+        }
+      ]
+    },
+    {
+      "test": "radius 2 offset count",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "radius 1 near chunk ticks",
+      "passed": true,
+      "detail": [
+        {
+          "denied": false,
+          "dimension": "Overworld",
+          "last_tick": 114714,
+          "optimizer_denied": false,
+          "references": 3,
+          "resident": true,
+          "state": 11,
+          "x": 0,
+          "z": 0
+        },
+        {
+          "denied": false,
+          "dimension": "Overworld",
+          "last_tick": 114762,
+          "optimizer_denied": false,
+          "references": 3,
+          "resident": true,
+          "state": 11,
+          "x": 0,
+          "z": 0
+        }
+      ]
+    },
+    {
+      "test": "radius 1 far chunk stays loaded without ticking",
+      "passed": true,
+      "detail": [
+        {
+          "denied": false,
+          "dimension": "Overworld",
+          "last_tick": 114690,
+          "optimizer_denied": false,
+          "references": 3,
+          "resident": true,
+          "state": 11,
+          "x": 2,
+          "z": 0
+        },
+        {
+          "denied": false,
+          "dimension": "Overworld",
+          "last_tick": 114690,
+          "optimizer_denied": false,
+          "references": 3,
+          "resident": true,
+          "state": 11,
+          "x": 2,
+          "z": 0
+        }
+      ]
+    },
+    {
+      "test": "radius 1 offset count",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "player-near chunk physically absent",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "player-near chunk stays absent",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "native reload attempts blocked",
+      "passed": true,
+      "detail": [
+        {
+          "blocked_requests": 0,
+          "constructed_views": 5,
+          "denied": 0,
+          "dimensions": [
+            {
+              "loaded": 303,
+              "name": "Overworld"
+            },
+            {
+              "loaded": 0,
+              "name": "Nether"
+            },
+            {
+              "loaded": 0,
+              "name": "TheEnd"
+            }
+          ],
+          "effective_radius_cap": 0,
+          "effective_tick_offsets": 57,
+          "native": true,
+          "optimizer_denied": 0,
+          "optimizer_enabled": false,
+          "pending_generation": 0,
+          "pins": 0,
+          "released_view_references": 0,
+          "simulation_radius_cap": 0,
+          "spawn_grace_ticks": 0,
+          "spawn_pending": false,
+          "tracked_views": 3
+        },
+        {
+          "blocked_requests": 1424,
+          "constructed_views": 5,
+          "denied": 1,
+          "dimensions": [
+            {
+              "loaded": 302,
+              "name": "Overworld"
+            },
+            {
+              "loaded": 0,
+              "name": "Nether"
+            },
+            {
+              "loaded": 0,
+              "name": "TheEnd"
+            }
+          ],
+          "effective_radius_cap": 0,
+          "effective_tick_offsets": 57,
+          "native": true,
+          "optimizer_denied": 0,
+          "optimizer_enabled": false,
+          "pending_generation": 0,
+          "pins": 0,
+          "released_view_references": 3,
+          "simulation_radius_cap": 0,
+          "spawn_grace_ticks": 0,
+          "spawn_pending": false,
+          "tracked_views": 3
+        }
+      ]
+    },
+    {
+      "test": "player remains connected",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "saved block survives unload and reload",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "occupied chunk physically absent",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "occupied unload retains player connection",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "occupied chunk restored",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "remote chunk can be pinned",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "remote pin release permits unload",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "invalid commands rejected without server failure",
+      "passed": true,
+      "detail": null
+    }
+  ]
+}

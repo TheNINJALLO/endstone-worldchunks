@@ -1,0 +1,25 @@
+{
+  "passed": 4,
+  "checks": [
+    {
+      "test": "native status has a readable summary",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "optimizer status has a readable summary",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "native JSON format remains available",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "optimizer JSON format remains available",
+      "passed": true,
+      "detail": null
+    }
+  ]
+}

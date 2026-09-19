@@ -1,0 +1,13 @@
+{
+    "version": "0.5",
+    "requires": [
+        "zlib/1.3.2#1cb806da49011867778ffb6ac7190fcb%1777558780.503",
+        "openssl/3.6.4#bc460bf37686ccae86a15bfdce71be11%1787920038.176",
+        "nlohmann_json/3.12.0#2d634ab0ec8d9f56353e5ccef6d6612c%1744735883.94",
+        "funchook/1.1.3#516d8dacb45cc278d9a15b1af0c0520d%1789849980.099233",
+        "expected-lite/0.9.0#d20324d8ae346eca72fb114683455136%1750939162.625"
+    ],
+    "build_requires": [],
+    "python_requires": [],
+    "config_requires": []
+}

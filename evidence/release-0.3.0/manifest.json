@@ -1,0 +1,60 @@
+{
+  "version": "0.3.0",
+  "tested_at_utc": "2026-09-19T23:06:39.651056+00:00",
+  "endstone": "0.11.11",
+  "bds": "1.26.51.1",
+  "python_abi": "cp314",
+  "automated_checks": 135,
+  "policy_checks": 20,
+  "suites": {
+    "linux": {
+      "command-output.json": 4,
+      "live-regression.json": 21,
+      "optimizer-empty.json": 4,
+      "optimizer-live.json": 22,
+      "optimizer-restart.json": 4,
+      "optimizer-tps-stress.json": 2
+    },
+    "windows": {
+      "command-output.json": 4,
+      "fingerprint.json": 3,
+      "live-regression.json": 21,
+      "optimizer-empty.json": 4,
+      "optimizer-live.json": 22,
+      "optimizer-restart.json": 4
+    }
+  },
+  "native_binaries": {
+    "endstone_worldchunks.so": {
+      "sha256": "d908e9777d5896c120ba897b98e6a306d9d4b461365677f9fddbbf0101a4dd30",
+      "bytes": 7864048
+    },
+    "endstone_worldchunks_optimizer.so": {
+      "sha256": "34a700c14a489875556d9debecd198d49e90caed423225b3b7ca21135aa55511",
+      "bytes": 1735680
+    },
+    "endstone_worldchunks.dll": {
+      "sha256": "a1d8df152e84b0f9c838b3b4332326be43aba4951012dedd1b748525b8927724",
+      "bytes": 742400
+    },
+    "endstone_worldchunks_optimizer.dll": {
+      "sha256": "54122f375ece8e805a8974cc9c604848e422a05152c9134feb83652293db81da",
+      "bytes": 576512
+    }
+  },
+  "installation_tested": [
+    "linux native",
+    "linux wheel",
+    "windows native",
+    "windows wheel"
+  ],
+  "final_residency": {
+    "linux_one_player_radius_2": 25,
+    "windows_one_player_radius_2": 25
+  },
+  "limits": [
+    "Exact server and Endstone runtime hashes required",
+    "No long-duration or large multiplayer soak test",
+    "CPU-quota slowdown test ran on Linux only"
+  ]
+}

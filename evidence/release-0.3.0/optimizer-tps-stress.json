@@ -1,0 +1,8 @@
+{
+  "passed": 2,
+  "real_tps_at_cleanup": 1.42,
+  "threshold": 18,
+  "sustained_seconds": 1,
+  "temporary_container_cpus": 0.02,
+  "cpu_limit_restored": true
+}

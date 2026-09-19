@@ -1,0 +1,36 @@
+{
+  "passed": 4,
+  "checks": [
+    {
+      "test": "saved optimizer configuration restored after restart",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "saved optimizer enabled state applied",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "saved radii and batch applied",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "automatic unload history not persisted",
+      "passed": true,
+      "detail": null
+    }
+  ],
+  "restored_config": {
+    "batch_size": 32,
+    "cleanup_interval_seconds": 30,
+    "enabled": true,
+    "keep_radius": 2,
+    "low_tps_seconds": 5,
+    "schema": 1,
+    "simulation_radius": 2,
+    "tps_cooldown_seconds": 30,
+    "tps_threshold": 18
+  }
+}

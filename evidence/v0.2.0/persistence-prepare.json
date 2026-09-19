@@ -1,0 +1,17 @@
+[
+  {
+    "test": "fresh distant chunk finishes generation",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "temporary generation neighbors released",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "remote generation neighbor absent",
+    "passed": true,
+    "detail": null
+  }
+]
