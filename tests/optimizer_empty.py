@@ -18,6 +18,8 @@ def wait(test):
 
 check("no players online", not command("wc players"))
 opt("off")
+original_compatibility = opt("status")["config"]["compatibility_mode"]
+opt("set compatibility_mode false")
 command("wc reset")
 command("tickingarea add circle 8 0 8 2 wco_empty true", "Added ticking area")
 wait(lambda: inspect(0, 0).get("state") == 11 and inspect(2, 0).get("state") == 11)
@@ -36,6 +38,7 @@ check("disable restores explicit ticking-area chunk", True)
 command("wc release Overworld 0 0")
 command("tickingarea remove wco_empty", "Removed")
 command("wc radius 2")
+opt("set compatibility_mode " + json.dumps(original_compatibility))
 opt("on")
 (EVIDENCE / "optimizer-empty.json").write_text(
     json.dumps({"passed": len(checks), "checks": checks}, indent=2) + "\n"

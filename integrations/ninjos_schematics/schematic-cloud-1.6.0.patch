@@ -1,0 +1,42 @@
+--- a/src/endstone_ninjos_schematics/plugin.py
++++ b/src/endstone_ninjos_schematics/plugin.py
+@@ -1594,6 +1594,13 @@
+         job.ready_since_tick = None
+         return True
+ 
++    def _protect_worldchunks(self, job: Any, chunk_x: int, chunk_z: int) -> None:
++        from .worldchunks_compat import WorldChunksGuard
++
++        if not hasattr(self, '_worldchunks_guard'):
++            self._worldchunks_guard = WorldChunksGuard(self)
++        self._worldchunks_guard.protect(job, chunk_x, chunk_z)
++
+     def _ensure_job_chunk(self, job: Any, dimension: Any, chunk_x: int, chunk_z: int) -> bool:
+         """Acquire, verify, and stabilize a held chunk before touching world blocks."""
+ 
+@@ -1607,6 +1614,7 @@
+                 or getattr(job, "ticket_slot", None) is not None
+             ):
+                 self._release_job_chunk(job, dimension)
++            self._protect_worldchunks(job, *requested)
+             if self._auto_load_chunks:
+                 if not self._request_job_chunk_ticket(job, dimension, *requested):
+                     return False
+@@ -1616,6 +1624,7 @@
+             job.ticket_backend = "observed"
+             job.waiting_since_tick = self._tick_counter
+ 
++        self._protect_worldchunks(job, *requested)
+         state = chunk_loaded_state(dimension, *requested)
+         if state is False:
+             job.ready_since_tick = None
+@@ -1690,6 +1699,9 @@
+                 self._legacy_ticket_slots.pop(slot, None)
+             if backend != "tickingarea" or not owned or legacy_remove_succeeded:
+                 self._forget_legacy_ticket(getattr(job, "ticket_name", None))
++        guard = getattr(self, '_worldchunks_guard', None)
++        if guard is not None:
++            guard.release(job)
+         job.ticket_chunk = None
+         job.ticket_owned = False
+         job.ticket_backend = None

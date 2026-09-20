@@ -1,5 +1,5 @@
 #pragma once
-// Linux C ABI. Resolve this symbol from the loaded WorldChunks plugin module.
+// Linux/Windows C ABI. Resolve this symbol from the loaded WorldChunks plugin module.
 // Call only on the primary server thread. JSON input/output use UTF-8.
 // The provider owns the returned string; copy it before the next API call.
 // Exceptions and C++ allocations never cross the plugin boundary.

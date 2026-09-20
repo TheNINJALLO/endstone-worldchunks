@@ -2,12 +2,25 @@
 
 Install WorldChunks and WorldChunks Optimizer from the same release, or install
 the platform wheel containing both. See the [installation instructions](../README.md#install).
-Both plugins require the matching BDS 1.26.51.1 and Endstone 0.11.11 CPython 3.14 binaries.
+Both plugins require the matching BDS 1.26.51.1 and Endstone 0.11.12 CPython 3.14 binaries.
 
 Operators configure it with `/wco`. Permission: `worldchunks.optimizer.admin`, granted to operators by default.
 
+Version 0.3.1 builds default to `compatibility_mode: true`, including migration of
+existing configs that omit the field. This leaves chunk retention, generation
+neighborhoods, and player simulation to Bedrock. TPS is still sampled, but interval,
+TPS-triggered and manual `/wco run` eviction are inactive. Configured radii are
+retained for later use. The native provider also suppresses direct API cleanup
+requests, including requests from older companions.
+
+Use compatibility mode for unreviewed structure add-ons. It relinquishes the
+optimizer's forced chunk reduction; it is not selective detection of structure
+jobs. A compatible pair of the core and companion is required. The following
+example explicitly opts into aggressive cleanup, which can interrupt add-ons:
+
 ```text
 /wco status
+/wco set compatibility_mode false
 /wco set keep_radius 2
 /wco set simulation_radius 1
 /wco set cleanup_interval_seconds 30
@@ -23,7 +36,7 @@ Operators configure it with `/wco`. Permission: `worldchunks.optimizer.admin`, g
 
 `keep_radius` is a **square of chunk coordinates** around each online player, including the center. Radius 1 protects up to 9 chunks; radius 2 protects up to 25; radius 3 protects up to 49. Overlapping player areas share chunks. Players only protect chunks in their current dimension. Set the simulation radius no larger than the keep radius; lower simulation first when reducing keep radius. There is no per-player override in this version.
 
-The keep radius is a retention limit, not a promise to generate that number of chunks. BDS still loads the player's area. The optimizer evicts fully loaded chunks outside the union of player areas, including chunks retained by explicit ticking areas. With no players online, all unpinned loaded chunks are eligible. Manual `/wc load` pins and their generation neighborhoods are protected. Manual `/wc unload` rules still take precedence inside the protected radius.
+With compatibility mode disabled, the keep radius is a retention limit, not a promise to generate that number of chunks. BDS still loads the player's area. The optimizer evicts fully loaded chunks outside the union of player areas, including chunks retained by explicit ticking areas unless their owner acquires a temporary protection. With no players online, unpinned, unprotected loaded chunks are eligible. Manual `/wc load` pins and their generation neighborhoods are protected. Manual `/wc unload` rules still take precedence inside the protected radius. [Integrations](integrations.md) explains temporary protection for schematic and add-on jobs.
 
 Cleanup runs on the interval **or** when Endstone's current TPS is at or below the threshold for the sustained duration. TPS is sampled once per second on the server thread. A cooldown bounds repeated TPS cleanup during persistent lag. Both timers use monotonic wall time; execution still requires the server to tick. This can reduce chunk work but cannot guarantee a TPS recovery or recover a completely frozen server.
 
@@ -33,6 +46,7 @@ Default saved configuration at `plugins/worldchunks_optimizer/config.json`:
 {
   "schema": 1,
   "enabled": true,
+  "compatibility_mode": true,
   "keep_radius": 2,
   "simulation_radius": 2,
   "cleanup_interval_seconds": 30,
@@ -45,6 +59,7 @@ Default saved configuration at `plugins/worldchunks_optimizer/config.json`:
 
 | Setting | Allowed values |
 | --- | --- |
+| `compatibility_mode` | `true` leaves retention/simulation to Bedrock; `false` enables forced cleanup and the simulation cap |
 | `keep_radius` | 1–32 chunks |
 | `simulation_radius` | 1–keep_radius; also capped by the original BDS ticking offsets |
 | `cleanup_interval_seconds` | 0 disables the timer; otherwise 1–86400 |
@@ -56,6 +71,13 @@ Default saved configuration at `plugins/worldchunks_optimizer/config.json`:
 `/wco set` validates and saves changes immediately. `/wco reload` validates the complete file before applying it. Invalid changes leave the active configuration intact. Radius/configuration changes clear the previous temporary rules and restart the scheduling timers. The optimizer is enabled by default; `/wco off` persists the disabled state.
 
 Automatic unload restrictions stay in memory and are separate from `worldchunks/policy.json`. `/wco off` clears them, restores visible chunks in batches, and restores the underlying `/wc radius` setting. It preserves manual pins and denies. `/wc allow` removes a manual deny only; use a manual pin to protect a remote chunk from subsequent automatic cleanup. `/wc status` and `/wc inspect` expose optimizer restrictions separately.
+
+Switching compatibility mode on clears queued cleanup and automatic denies, restores
+affected views in batches, and restores the original simulation offsets even when
+a manual radius cap is saved. Manual unload rules remain explicit overrides.
+Switching it off reactivates the saved aggressive settings after normal grace.
+When downgrading to published 0.3.0 binaries, restore the previous config or remove
+the new `compatibility_mode` field; that version rejects unknown config keys.
 
 Travel, joining, teleporting, respawning, and configuration changes allow a temporary grace period of 100 server ticks. Chunk-boundary movement extends it and restores an approaching player's generation neighborhood. During grace the simulation cap returns to vanilla and automatic eviction pauses. If an occupied chunk is still loading, this pause continues until it finishes. Continuous travel can therefore keep a larger area loaded. This is deliberate: BDS generation and spawning require neighboring chunks. Cleanup resumes after players settle and a trigger has requested it. Manual denies can block neighboring generation and must be released by an operator; the optimizer never overrides them. Existing native owners can delay disposal, and clients can retain cached terrain.
 

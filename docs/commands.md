@@ -44,13 +44,16 @@ Permission: `worldchunks.optimizer.admin`.
 | `/wco config` | Show the saved configuration. |
 | `/wco on` | Enable automatic management and save the enabled state. |
 | `/wco off` | Disable automatic management, release its restrictions and restore the manual radius. |
-| `/wco run` | Request cleanup now. Loading grace still applies. |
+| `/wco run` | Request forced cleanup now; requires compatibility mode off. Loading grace still applies. |
+| `/wco protect <id> <dimension> <x1> <z1> <x2> <z2> <ticks>` | Protect a chunk rectangle and its six-chunk generation margin from automatic cleanup. Repeat the ID to renew/update. |
+| `/wco unprotect <id>` | Release this job's protection; overlapping jobs keep theirs. |
 | `/wco set <setting> <value>` | Change and save a setting. |
 | `/wco reload` | Read `config.json` again. Invalid settings leave the active configuration intact. |
 | `/wco help` | Show command syntax and setting names. |
 
 | Setting | Range | Default |
 | --- | --- | --- |
+| `compatibility_mode` | `true` uses Bedrock retention/simulation; `false` enables forced cleanup and the simulation cap | `true` |
 | `keep_radius` | 1 to 32 chunks | 2 |
 | `simulation_radius` | 1 to `keep_radius` | 2 |
 | `cleanup_interval_seconds` | 0 to 86400; 0 disables the timer | 30 |
@@ -58,6 +61,12 @@ Permission: `worldchunks.optimizer.admin`.
 | `low_tps_seconds` | 1 to 300 | 5 |
 | `tps_cooldown_seconds` | 1 to 3600 | 30 |
 | `batch_size` | 1 to 512 | 32 |
+
+For structure add-ons, leave `/wco set compatibility_mode true`. It restores
+vanilla simulation and disables forced cleanup. Manual unload rules still apply.
+With the optimizer disabled, `/wc radius 0` also clears the manual simulation cap.
+The radius and trigger examples below take effect only after explicitly setting
+`/wco set compatibility_mode false`.
 
 To use a one-chunk radius, lower simulation first:
 
@@ -86,3 +95,12 @@ The loaded radius is a square around each player: radius 1 covers 9 coordinates,
 Append `--json` to any data command for machine-readable output. For example,
 `wc status --json` and `wco status --json`. JSON replies retain the
 `WORLDCHUNKS` and `WORLDCHUNKS_OPTIMIZER` prefixes.
+
+Protection is temporary and does not load chunks itself. Acquire it before creating
+the job's ticking area, renew it during work, and release it after dropping the
+job's chunk ticket. Durations are 1–72,000 **server ticks**, so lag extends them.
+IDs contain 1–64 letters, digits, `_`, `:`, `-` or `.`; use a unique ID per job.
+Bounds are ordered, inclusive chunk coordinates and limited to 4,096 chunks per
+lease, excluding its margin; at most 256 leases can be active. Manual unload
+rules inside the region or its margin reject acquisition. Protection survives
+optimizer configuration changes but does not persist across server restarts.

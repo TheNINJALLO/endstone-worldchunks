@@ -1,6 +1,6 @@
 # Native adapter
 
-This adapter is specific to the supplied Linux BDS 1.26.51.1 executable and the Endstone 0.11.11 CPython 3.14 Linux runtime. Both complete files must match the SHA256 values in `compatibility/linux-1.26.51.1.json` before any hook is prepared. ASLR is handled by resolving module load addresses. Another Python wheel can have different private function addresses even with the same Endstone version.
+This adapter is specific to the supplied Linux BDS 1.26.51.1 executable and the Endstone 0.11.12 CPython 3.14 Linux runtime. Both complete files must match the SHA256 values in `compatibility/linux-1.26.51.1.json` before any hook is prepared. ASLR is handled by resolving module load addresses. Another Python wheel can have different private function addresses even with the same Endstone version.
 
 ## Ownership and unload
 
@@ -14,11 +14,20 @@ An unload rule blocks `MainChunkSource::getExistingChunk`, `createNewChunk`, and
 
 `allow` removes a rule and fills matching live view slots through native virtual `setLevelChunk`. This is necessary because stationary views otherwise retain holes after an unload. `load` owns a separate shared pointer; `release` drops only that plugin pin and does not override vanilla owners.
 
-Shutdown releases plugin ownership, then flushes each Dimension's chunk garbage collector (virtual slot 6), the chunk source's thread batch (slot 29), and pending discarded writes (slot 28) before removing hooks. This ordering matters on Endstone 0.11.11: deferred chunk disposal during the later Level destructor can emit an unload event after Endstone's server singleton has been destroyed. A GDB trace reproduced that null-server access before the explicit flush was added.
+Shutdown releases plugin ownership, then flushes each Dimension's chunk garbage collector (virtual slot 6), the chunk source's thread batch (slot 29), and pending discarded writes (slot 28) before removing hooks. This ordering was established on Endstone 0.11.11: deferred chunk disposal during the later Level destructor can emit an unload event after Endstone's server singleton has been destroyed. A GDB trace reproduced that null-server access before the explicit flush was added.
 
 New distant chunks require more than a single `getOrLoadChunk` call. While a pinned center is unfinished, the adapter requests and retains a thirteen-by-thirteen neighborhood, retries the native loading pipeline each tick, and dispatches pending chunk tasks using the same native routine as the ChunkView fetch callback (`0xca2c930`, boolean argument false). The center advances through terrain, decoration, replacement-data checks and lighting. Once state 11 is reached, the temporary neighborhood is released. Denied neighbors remain denied and can prevent generation from completing; `status.pending_generation` exposes unfinished pins. Releasing a pin also releases its temporary neighborhood.
 
 ## Simulation radius
+
+In the 0.3.1 companion's default compatibility mode, the native provider
+restores the captured vanilla offsets and ignores the configured optimizer and
+manual radius caps while the companion is enabled. It clears previous automatic
+rules and skips automatic denial, candidate eviction and view detachment. Even
+direct native cleanup requests are suppressed. Manual denies remain explicit
+operator overrides. Disabling the companion restores the underlying manual cap.
+The reduced-radius behavior below applies when compatibility mode is disabled
+or a manual cap is used without the companion.
 
 The native Level owns the ticking-offset vector used by player simulation. Some BDS callers inline the Player getter, so intercepting that getter does not reliably change simulation. The adapter captures the original vector and filters its actual contents to offsets with both absolute coordinates at most the requested radius. It preserves the native allocation and never grows the vector beyond its original size. A radius of zero restores the original contents; it does not mean zero ticking chunks.
 
@@ -47,7 +56,7 @@ Clang 20 and libc++ are essential: shared pointers and vectors cross the ABI. Th
 
 ## Repository research
 
-- [endstone](https://github.com/EndstoneMC/endstone/tree/v0.11.11): plugin API, startup lifecycle, scheduler, public loaded-chunk enumeration, native chunk-source declarations, and wrapper implementations.
+- [endstone](https://github.com/EndstoneMC/endstone/tree/v0.11.12): plugin API, startup lifecycle, scheduler, public loaded-chunk enumeration, native chunk-source declarations, and wrapper implementations.
 - [bedrock-protocol](https://github.com/EndstoneMC/bedrock-protocol): versioned codecs and chunk packet schemas. Protocol 2193 matches this server generation.
 - [protocol-docs](https://github.com/EndstoneMC/protocol-docs): documents the supplied 1.26.51.1 release. RequestChunkRadius (69), ChunkRadiusUpdated (70), and NetworkChunkPublisherUpdate (121) concern network visibility and publication; they do not release native chunk owners.
 - [protocol-dumper](https://github.com/EndstoneMC/protocol-dumper): explains the cereal/EnTT reflection pipeline behind generated packet schemas. It is a schema discovery tool, not an ownership controller; it is not preloaded into the test server.

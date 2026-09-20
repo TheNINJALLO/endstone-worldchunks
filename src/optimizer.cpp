@@ -23,14 +23,9 @@ double now()
 }
 Json defaults()
 {
-    return {{"schema", 1},
-            {"enabled", true},
-            {"keep_radius", 2},
-            {"simulation_radius", 2},
-            {"cleanup_interval_seconds", 30},
-            {"tps_threshold", 18.0},
-            {"low_tps_seconds", 5},
-            {"tps_cooldown_seconds", 30},
+    return {{"schema", 1},           {"enabled", true},        {"compatibility_mode", true},
+            {"keep_radius", 2},      {"simulation_radius", 2}, {"cleanup_interval_seconds", 30},
+            {"tps_threshold", 18.0}, {"low_tps_seconds", 5},   {"tps_cooldown_seconds", 30},
             {"batch_size", 32}};
 }
 void validate(const Json& c)
@@ -89,7 +84,7 @@ class WorldChunksOptimizer : public endstone::Plugin {
     {
         auto* provider = getServer().getPluginManager().getPlugin("worldchunks");
         if (!provider || !provider->isEnabled()) {
-            throw std::runtime_error("Install WorldChunks 0.3.0 alongside the optimizer");
+            throw std::runtime_error("Install WorldChunks 0.3.1 alongside the optimizer");
         }
         // Endstone loads a shadow copy with RTLD_LOCAL. Resolve the API in that
         // already loaded module, without loading a second native adapter.
@@ -113,9 +108,15 @@ class WorldChunksOptimizer : public endstone::Plugin {
         dlclose(module);
 #endif
         if (!request_) {
-            throw std::runtime_error("WorldChunks is too old: install the bundled 0.3.0 native plugin");
+            throw std::runtime_error("WorldChunks is too old: install the bundled 0.3.1 native plugin");
         }
-        call({{"op", "status"}});
+        const auto provider_status = call({{"op", "status"}});
+        if (!provider_status.contains("compatibility_mode")) {
+            // An older provider cannot honor compatibility mode. Release its
+            // automatic rules before refusing a mismatched plugin pair.
+            call({{"op", "disable"}});
+            throw std::runtime_error("Update both WorldChunks native plugins: the core lacks compatibility mode");
+        }
     }
     Json readConfig()
     {
@@ -125,6 +126,9 @@ class WorldChunksOptimizer : public endstone::Plugin {
         }
         std::ifstream input(path);
         auto result = Json::parse(input);
+        if (result.is_object() && !result.contains("compatibility_mode")) {
+            result["compatibility_mode"] = true;
+        }
         validate(result);
         return result;
     }
@@ -152,6 +156,7 @@ class WorldChunksOptimizer : public endstone::Plugin {
         }
         call({{"op", "configure"},
               {"enabled", candidate.at("enabled")},
+              {"compatibility_mode", candidate.at("compatibility_mode")},
               {"keep_radius", candidate.at("keep_radius")},
               {"simulation_radius", candidate.at("simulation_radius")},
               {"batch_size", candidate.at("batch_size")}});
@@ -179,6 +184,9 @@ class WorldChunksOptimizer : public endstone::Plugin {
         }
         next_sample_ = time + 1;
         sampled_tps_ = getServer().getCurrentTicksPerSecond();
+        if (config_.at("compatibility_mode").get<bool>()) {
+            return;
+        }
         const auto reason =
             trigger_.poll(time, sampled_tps_, config_.at("cleanup_interval_seconds"), config_.at("tps_threshold"),
                           config_.at("low_tps_seconds"), config_.at("tps_cooldown_seconds"));
@@ -213,7 +221,9 @@ class WorldChunksOptimizer : public endstone::Plugin {
                         connect();
                         apply(readConfig(), true);
                         ready_ = true;
-                        getLogger().info("Optimizer ready. Use /wco status and /wco help.");
+                        getLogger().info("Optimizer ready. Compatibility mode: {}. Use /wco status and /wco help.",
+                                         config_.at("compatibility_mode").get<bool>() ? "on (native chunk loading)"
+                                                                                      : "off (forced cleanup)");
                     }
                     tick();
                 }
@@ -267,7 +277,9 @@ class WorldChunksOptimizer : public endstone::Plugin {
             const bool json = worldchunks::takeJsonFlag(args);
             if (args.size() == 1 && args[0] == "help") {
                 sender.sendMessage(
-                    "wco status | config | on | off | run | reload\nwco set <setting> <value>\nSettings: keep_radius, "
+                    "wco status | config | on | off | run | reload\nwco set <setting> <value>\n"
+                    "wco protect <id> <dimension> <x1> <z1> <x2> <z2> <ticks>\nwco unprotect <id>\nSettings: "
+                    "compatibility_mode (true=Bedrock loading and simulation), keep_radius, "
                     "simulation_radius, cleanup_interval_seconds (0=off), tps_threshold (0=off), low_tps_seconds, "
                     "tps_cooldown_seconds, batch_size.\nRadius is a square around every online player. Pins are "
                     "preserved. Movement/spawn grace is 100 ticks.");
@@ -301,7 +313,24 @@ class WorldChunksOptimizer : public endstone::Plugin {
                     apply(candidate, true);
                 }
                 else if (args.size() == 1 && args[0] == "run") {
+                    if (config_.at("compatibility_mode").get<bool>()) {
+                        throw std::runtime_error(
+                            "Compatibility mode leaves chunk retention to Bedrock; forced cleanup is inactive");
+                    }
                     call({{"op", "cleanup"}, {"reason", "manual"}});
+                }
+                else if (args.size() == 8 && args[0] == "protect") {
+                    call({{"op", "protect"},
+                          {"id", args[1]},
+                          {"dimension", args[2]},
+                          {"x1", Json::parse(args[3])},
+                          {"z1", Json::parse(args[4])},
+                          {"x2", Json::parse(args[5])},
+                          {"z2", Json::parse(args[6])},
+                          {"ticks", Json::parse(args[7])}});
+                }
+                else if (args.size() == 2 && args[0] == "unprotect") {
+                    call({{"op", "unprotect"}, {"id", args[1]}});
                 }
                 else if (args.size() == 3 && args[0] == "set") {
                     if (!config_.contains(args[1]) || args[1] == "schema" || args[1] == "enabled") {
@@ -323,7 +352,7 @@ class WorldChunksOptimizer : public endstone::Plugin {
         return true;
     }
 };
-ENDSTONE_PLUGIN("worldchunks_optimizer", "0.3.0", WorldChunksOptimizer)
+ENDSTONE_PLUGIN("worldchunks_optimizer", "0.3.1", WorldChunksOptimizer)
 {
     description = "Automatic player chunk radius and TPS-triggered cleanup for WorldChunks";
     depend = {"worldchunks"};

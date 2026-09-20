@@ -36,7 +36,7 @@ for path in list(plugins.glob("endstone_worldchunks*" + extension)) + list(
     path.unlink()
 if wheel:
     tag = "win_amd64" if windows else "linux_x86_64"
-    path = root / "dist" / f"endstone_worldchunks_bundle-0.3.0-py3-none-{tag}.whl"
+    path = root / "dist" / f"endstone_worldchunks_bundle-0.3.1-py3-none-{tag}.whl"
     shutil.copyfile(path, plugins / path.name)
 else:
     for name in ["worldchunks", "worldchunks_optimizer"]:

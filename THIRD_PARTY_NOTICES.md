@@ -1,12 +1,12 @@
 # Third-party notices
 
-The plugin uses Endstone's public C++ SDK, pinned to v0.11.11, under Apache-2.0. No proprietary BDS executable, server data, or reconstructed complete BDS headers are included in the release archive.
+The plugin uses Endstone's public C++ SDK, pinned to v0.11.12, under Apache-2.0. No proprietary BDS executable, server data, or reconstructed complete BDS headers are included in the release archive.
 
 Dependencies included in the native binaries (OpenSSL, zlib and libc++ apply to Linux):
 
 | Component | Version | License |
 | --- | --- | --- |
-| Endstone SDK | 0.11.11 | Apache-2.0 |
+| Endstone SDK | 0.11.12 | Apache-2.0 |
 | expected-lite | 0.9.0 | Boost Software License 1.0 |
 | funchook | 1.1.3 | GPL-2.0 with linking exception |
 | diStorm (through funchook) | 3.5.2 | BSD-3-Clause |

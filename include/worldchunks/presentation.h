@@ -50,6 +50,9 @@ inline void sendCoreResult(endstone::CommandSender& sender, const nlohmann::json
                            " | Pinned: " + valueText(result.at("pins")));
         sender.sendMessage("Manual unload rules: " + valueText(result.at("denied")) +
                            " | Optimizer rules: " + valueText(result.at("optimizer_denied")));
+        if (result.contains("compatibility_mode")) {
+            sender.sendMessage("Optimizer compatibility mode: " + valueText(result.at("compatibility_mode")));
+        }
         sender.sendMessage("Simulation radius: " + valueText(result.at("effective_radius_cap")) +
                            " (0 = vanilla) | Tick offsets: " + valueText(result.at("effective_tick_offsets")));
         for (const auto& dimension : result.at("dimensions")) {
@@ -84,6 +87,13 @@ inline void sendOptimizerResult(endstone::CommandSender& sender, const nlohmann:
     }
     const auto& config = result.at("config");
     const auto& native = result.at("native");
+    if (native.value("compatibility_mode", false) && config.at("enabled").get<bool>()) {
+        sender.sendMessage("Compatibility mode: on | Bedrock controls chunk retention and simulation");
+        sender.sendMessage("Configured radii below are inactive; forced cleanup is inactive.");
+    }
+    else if (config.at("enabled").get<bool>()) {
+        sender.sendMessage("Compatibility mode: off | Forced cleanup and simulation cap are active");
+    }
     sender.sendMessage(std::string("Enabled: ") + valueText(config.at("enabled")) +
                        " | Keep radius: " + valueText(config.at("keep_radius")) +
                        " | Simulation radius: " + valueText(config.at("simulation_radius")));
@@ -98,5 +108,8 @@ inline void sendOptimizerResult(endstone::CommandSender& sender, const nlohmann:
     sender.sendMessage("Cleanup runs: " + valueText(native.at("cleanup_runs")) +
                        " | Chunks queued: " + valueText(native.at("pending_chunks")) +
                        " | Temporary unload rules: " + valueText(native.at("temporary_denies")));
+    if (native.contains("protections")) {
+        sender.sendMessage("Protected jobs: " + std::to_string(native.at("protections").size()));
+    }
 }
 } // namespace worldchunks

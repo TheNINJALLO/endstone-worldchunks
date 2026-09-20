@@ -8,7 +8,7 @@ root = Path(__file__).resolve().parents[1]
 path = root.parent / ".build-inputs/bds-1.26.51-linux/bedrock_server"
 args = sys.argv[1:]
 if args and args[0] == "--runtime":
-    path = root.parent / ".build-inputs/libendstone_runtime-0.11.11-cp314.so"
+    path = root.parent / ".build-inputs/libendstone_runtime-0.11.12-cp314.so"
     args.pop(0)
 im = Image(path)
 for arg in args:

@@ -59,6 +59,7 @@ def restore():
 watchdog = threading.Timer(25, restore)
 try:
     opt("off")
+    opt("set compatibility_mode false")
     opt("set cleanup_interval_seconds 0")
     opt("set tps_threshold 18")
     opt("set low_tps_seconds 1")
@@ -94,7 +95,7 @@ try:
         "temporary_container_cpus": 0.02,
         "cpu_limit_restored": restored.is_set(),
     }
-    (ROOT / "evidence/release-0.3.0/optimizer-tps-stress.json").write_text(
+    (ROOT / "evidence/release-0.3.1/optimizer-tps-stress.json").write_text(
         json.dumps(result, indent=2) + "\n"
     )
     print(json.dumps(result), flush=True)
@@ -102,6 +103,7 @@ finally:
     restore()
     watchdog.cancel()
     opt("off")
+    opt("set compatibility_mode " + json.dumps(original["compatibility_mode"]))
     for key in [
         "cleanup_interval_seconds",
         "tps_threshold",

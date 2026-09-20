@@ -1,6 +1,7 @@
 #include "worldchunks/native.h"
 #include "worldchunks/abi.h"
 #include "worldchunks/optimizer_policy.h"
+#include "worldchunks/protection.h"
 #include <endstone/level/chunk.h>
 #include <endstone/level/dimension.h>
 #include <endstone/level/level.h>
@@ -186,7 +187,10 @@ struct State {
     std::mutex policy_mutex;
     std::set<Key> denied;
     std::set<Key> optimizer_denied;
+    ChunkProtections protections;
+    uint64_t ticks{};
     bool optimizer_enabled{}, optimizer_suspended{}, optimizer_loading{};
+    bool compatibility_mode{true};
     int keep_radius{2}, optimizer_radius{2}, batch_size{32};
     std::set<Key> player_centers;
     std::deque<Key> cleanup_queue, restore_queue;
@@ -218,7 +222,8 @@ struct State {
         auto dim = field<void*>(source, 0x28);
         std::lock_guard guard(policy_mutex);
         const Key key{dim, pos.x, pos.z};
-        return denied.contains(key) || (optimizer_enabled && !optimizer_suspended && optimizer_denied.contains(key));
+        return denied.contains(key) ||
+               (optimizer_enabled && !compatibility_mode && !optimizer_suspended && optimizer_denied.contains(key));
     }
 };
 State* active{};
@@ -418,7 +423,7 @@ struct Native::Impl {
 #ifdef _WIN32
         return p;
 #else
-        return reinterpret_cast<void* (*)(const void*)>(state.runtime + 0x152750)(p);
+        return reinterpret_cast<void* (*)(const void*)>(state.runtime + 0x153430)(p);
 #endif
     }
     void captureOffsets()
@@ -455,7 +460,8 @@ struct Native::Impl {
                 state.spawn_pending = true;
             }
         }
-        const int requested = state.optimizer_enabled ? state.optimizer_radius : state.radius;
+        const int requested =
+            state.optimizer_enabled ? (state.compatibility_mode ? 0 : state.optimizer_radius) : state.radius;
         const int effective =
             (state.spawn_pending || state.grace_ticks > 0 || (state.optimizer_enabled && state.optimizer_loading))
                 ? 0
@@ -516,6 +522,11 @@ struct Native::Impl {
         }
         return false;
     }
+    bool protectedChunk(const Key& key)
+    {
+        const auto& [dim, x, z] = key;
+        return state.protections.contains(reinterpret_cast<uintptr_t>(dim), x, z);
+    }
     void clearOptimizerRules()
     {
         std::lock_guard guard(state.policy_mutex);
@@ -554,7 +565,7 @@ struct Native::Impl {
     void updateOptimizer()
     {
         auto& s = state;
-        if (s.optimizer_enabled) {
+        if (s.optimizer_enabled && !s.compatibility_mode) {
             std::set<Key> centers;
             for (auto* p : server.getOnlinePlayers()) {
                 auto location = p->getLocation();
@@ -638,7 +649,7 @@ struct Native::Impl {
                     auto* dim = dimension(d->getName());
                     for (auto& chunk : d->getLoadedChunks()) {
                         Key key{dim, chunk->getX(), chunk->getZ()};
-                        if (!nearPlayer(key) && !pinned(key)) {
+                        if (!nearPlayer(key) && !pinned(key) && !protectedChunk(key)) {
                             s.cleanup_queue.push_back(key);
                         }
                     }
@@ -648,7 +659,7 @@ struct Native::Impl {
                 for (int n = 0; n < s.batch_size && !s.cleanup_queue.empty(); ++n) {
                     auto key = s.cleanup_queue.front();
                     s.cleanup_queue.pop_front();
-                    if (nearPlayer(key) || pinned(key)) {
+                    if (nearPlayer(key) || pinned(key) || protectedChunk(key)) {
                         ++s.cleanup_skipped;
                         continue;
                     }
@@ -727,7 +738,7 @@ struct Native::Impl {
         {
             std::lock_guard guard(state.policy_mutex);
             policy = state.denied;
-            if (state.optimizer_enabled && !state.optimizer_suspended) {
+            if (state.optimizer_enabled && !state.compatibility_mode && !state.optimizer_suspended) {
                 policy.insert(state.optimizer_denied.begin(), state.optimizer_denied.end());
             }
         }
@@ -792,8 +803,8 @@ void Native::install()
     if (sha256(path.data()) != "76d547f82e02c18d0986c30b47132c9cc4171d0f2df1c00649e50ff35788b321") {
         throw std::runtime_error("Unsupported BDS binary; expected Windows 1.26.51.1");
     }
-    if (sha256(s.runtime_path) != "81f0279301dc5b10e8c10b71c61c6eeb2ea04a8c0783399d6377a881cc86da9e") {
-        throw std::runtime_error("Unsupported Endstone runtime; expected 0.11.11 CPython 3.14 Windows wheel");
+    if (sha256(s.runtime_path) != "5f7636e229e750852965e9d7ad06ebe91b84ffd031acc29fbad4ce51c0713b06") {
+        throw std::runtime_error("Unsupported Endstone runtime; expected 0.11.12 CPython 3.14 Windows wheel");
     }
     s.lock = [](void* p) { AcquireSRWLockExclusive(static_cast<PSRWLOCK>(p)); };
     s.unlock = [](void* p) { ReleaseSRWLockExclusive(static_cast<PSRWLOCK>(p)); };
@@ -815,8 +826,8 @@ void Native::install()
     if (sha256("/proc/self/exe") != "e93e739f373a84edfff7c9cd76fcb090c2176744b412e1143f1b38e91a49bed4") {
         throw std::runtime_error("Unsupported BDS binary; expected the supplied Linux 1.26.51.1 archive");
     }
-    if (sha256(s.runtime_path) != "1358eae445a8700b7b14746170d0f691c025fea705c10f623055fa82b8d71c29") {
-        throw std::runtime_error("Unsupported Endstone runtime; expected 0.11.11 CPython 3.14 Linux wheel");
+    if (sha256(s.runtime_path) != "009c03d636b1e2c9a251a5c4ac1b522456cb90bbfaf6e1c7076b6affc03e3f78") {
+        throw std::runtime_error("Unsupported Endstone runtime; expected 0.11.12 CPython 3.14 Linux wheel");
     }
     s.lock = reinterpret_cast<Lock>(s.bds + 0x402d3d0);
     s.unlock = reinterpret_cast<Lock>(s.bds + 0x402d4a0);
@@ -883,6 +894,7 @@ void Native::stop()
 void Native::tick()
 {
     impl_->requireMain();
+    impl_->state.protections.expire(++impl_->state.ticks);
     if (impl_->state.grace_ticks > 0) {
         --impl_->state.grace_ticks;
     }
@@ -907,6 +919,7 @@ Json Native::status()
             {"denied", s.denied.size()},
             {"optimizer_denied", s.optimizer_denied.size()},
             {"optimizer_enabled", s.optimizer_enabled},
+            {"compatibility_mode", s.compatibility_mode},
             {"pins", s.pins.size()},
             {"pending_generation", s.generation_neighbors.size()},
             {"blocked_requests", s.blocked.load()},
@@ -935,6 +948,7 @@ Json Native::inspect(const std::string& name, int x, int z)
                    {"denied", denied},
                    {"resident", bool(chunk)},
                    {"optimizer_denied", optimized},
+                   {"protected", impl_->protectedChunk({dim, x, z})},
                    {"references", chunk ? chunk.use_count() - 1 : 0}};
     if (chunk) {
         result["state"] = field<uint8_t>(chunk.get(), abi::chunk_state);
@@ -1149,6 +1163,8 @@ Json Native::optimizer(const Json& request)
     const auto op = request.at("op").get<std::string>();
     if (op == "configure") {
         const bool enabled = request.at("enabled").get<bool>();
+        // Older callers omit the new field; preserve native loading by default.
+        const bool compatible = request.value("compatibility_mode", true);
         const int keep = request.at("keep_radius").get<int>();
         const int radius = request.at("simulation_radius").get<int>();
         const int batch = request.at("batch_size").get<int>();
@@ -1160,7 +1176,10 @@ Json Native::optimizer(const Json& request)
         {
             std::lock_guard guard(s.policy_mutex);
             s.optimizer_enabled = enabled;
+            s.compatibility_mode = compatible;
+            s.optimizer_suspended = false;
         }
+        s.optimizer_loading = false;
         s.keep_radius = keep;
         s.optimizer_radius = radius;
         s.batch_size = batch;
@@ -1181,32 +1200,98 @@ Json Native::optimizer(const Json& request)
         if (!s.optimizer_enabled) {
             throw std::runtime_error("Optimizer is disabled");
         }
-        s.cleanup_requested = true;
-        s.cleanup_reason = request.value("reason", "manual");
+        if (s.compatibility_mode) {
+            // Also protect against older companions that still request cleanup.
+            s.cleanup_requested = false;
+            s.cleanup_reason = "compatibility_mode";
+        }
+        else {
+            s.cleanup_requested = true;
+            s.cleanup_reason = request.value("reason", "manual");
+        }
+    }
+    else if (op == "protect") {
+        const auto id = request.at("id").get<std::string>();
+        const auto name = request.at("dimension").get<std::string>();
+        auto integer = [&](const char* key) {
+            const auto& value = request.at(key);
+            if (!value.is_number_integer() || value < -1874999 || value > 1874999) {
+                throw std::runtime_error(std::string(key) + " must be an integer within range");
+            }
+            return value.get<int>();
+        };
+        const int x1 = integer("x1"), z1 = integer("z1"), x2 = integer("x2"), z2 = integer("z2");
+        const int ticks = integer("ticks");
+        ChunkProtections::validate(id, x1, z1, x2, z2, ticks);
+        auto* dim = impl_->dimension(name);
+        const auto dimension = reinterpret_cast<uintptr_t>(dim);
+        const ChunkProtections::Region region{dimension, name, x1, z1, x2, z2, 0};
+        std::lock_guard guard(s.policy_mutex);
+        for (const auto& [d, x, z] : s.denied) {
+            if (region.contains(reinterpret_cast<uintptr_t>(d), x, z)) {
+                throw std::runtime_error(
+                    "Protection overlaps a manual unload rule; use wc allow before starting the job");
+            }
+        }
+        const auto previous = s.protections.regions().find(id);
+        const bool changed = previous == s.protections.regions().end() || previous->second.dimension != dimension ||
+                             previous->second.x1 != x1 || previous->second.z1 != z1 || previous->second.x2 != x2 ||
+                             previous->second.z2 != z2;
+        s.protections.protect(id, dimension, name, x1, z1, x2, z2, ticks, s.ticks);
+        // Lift previous restrictions before the caller requests its ticking area.
+        // Queued candidates are rechecked at eviction; view restoration stays batched.
+        for (auto it = s.optimizer_denied.begin(); changed && it != s.optimizer_denied.end();) {
+            const auto& [d, x, z] = *it;
+            if (region.contains(reinterpret_cast<uintptr_t>(d), x, z)) {
+                s.restore_queue.push_back(*it);
+                it = s.optimizer_denied.erase(it);
+            }
+            else {
+                ++it;
+            }
+        }
+    }
+    else if (op == "unprotect") {
+        s.protections.release(request.at("id").get<std::string>());
     }
     else if (op != "status") {
         throw std::runtime_error("Unknown optimizer API operation");
     }
+    Json protections = Json::array();
+    for (const auto& [id, region] : s.protections.regions()) {
+        protections.push_back({{"id", id},
+                               {"dimension", region.dimension_name},
+                               {"x1", region.x1},
+                               {"z1", region.z1},
+                               {"x2", region.x2},
+                               {"z2", region.z2},
+                               {"remaining_ticks", region.expires - s.ticks}});
+    }
     std::lock_guard guard(s.policy_mutex);
-    return {
-        {"api", 1},
-        {"enabled", s.optimizer_enabled},
-        {"keep_radius", s.keep_radius},
-        {"simulation_radius", s.optimizer_radius},
-        {"batch_size", s.batch_size},
-        {"temporary_denies", s.optimizer_denied.size()},
-        {"rule_limit", 65536},
-        {"pending_chunks", s.cleanup_queue.size()},
-        {"pending_restore", s.restore_queue.size()},
-        {"cleanup_requested", s.cleanup_requested},
-        {"cleanup_runs", s.cleanup_runs},
-        {"chunks_marked", s.cleanup_marked},
-        {"chunks_skipped", s.cleanup_skipped},
-        {"last_reason", s.cleanup_reason},
-        {"paused_for_players", s.optimizer_enabled && (s.spawn_pending || s.grace_ticks > 0 || s.optimizer_loading)},
-        {"waiting_for_player_chunks", s.optimizer_enabled && s.optimizer_loading},
-        {"grace_ticks", s.grace_ticks},
-        {"player_centers", s.player_centers.size()},
-        {"effective_simulation_radius", s.effective_radius}};
+    return {{"api", 1},
+            {"protection_api", 1},
+            {"protections", protections},
+            {"protection_limit", ChunkProtections::limit},
+            {"enabled", s.optimizer_enabled},
+            {"compatibility_mode", s.compatibility_mode},
+            {"automatic_cleanup_active", s.optimizer_enabled && !s.compatibility_mode},
+            {"keep_radius", s.keep_radius},
+            {"simulation_radius", s.optimizer_radius},
+            {"batch_size", s.batch_size},
+            {"temporary_denies", s.optimizer_denied.size()},
+            {"rule_limit", 65536},
+            {"pending_chunks", s.cleanup_queue.size()},
+            {"pending_restore", s.restore_queue.size()},
+            {"cleanup_requested", s.cleanup_requested},
+            {"cleanup_runs", s.cleanup_runs},
+            {"chunks_marked", s.cleanup_marked},
+            {"chunks_skipped", s.cleanup_skipped},
+            {"last_reason", s.cleanup_reason},
+            {"paused_for_players", s.optimizer_enabled && !s.compatibility_mode &&
+                                       (s.spawn_pending || s.grace_ticks > 0 || s.optimizer_loading)},
+            {"waiting_for_player_chunks", s.optimizer_enabled && !s.compatibility_mode && s.optimizer_loading},
+            {"grace_ticks", s.grace_ticks},
+            {"player_centers", s.player_centers.size()},
+            {"effective_simulation_radius", s.effective_radius}};
 }
 } // namespace worldchunks

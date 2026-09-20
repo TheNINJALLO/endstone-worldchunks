@@ -1,0 +1,125 @@
+{
+  "passed": 24,
+  "checks": [
+    {
+      "test": "Endstone 0.11.12 startup",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "native plugin active",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "no players online",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "no-player cleanup evicts explicit ticking-area chunk",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "no-player cleanup keeps manual pin",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "disable restores explicit ticking-area chunk",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "no connected players",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "explicit ticking area loads center",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "explicit ticking area center physically absent",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "explicit ticking area cannot reload denied center",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "explicit ticking area reload attempts blocked",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "explicit ticking area restore preserves saved block",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "no players online",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "reproduced automatic eviction of a ticking-area chunk",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "protection lifts previous automatic deny immediately",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "restored chunk retains saved blocks",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "overlapping lease survives another job completing",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "protection includes generation neighbors",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "unrelated ticking area still cleaned",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "TPS-triggered cleanup retains protected chunks",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "configuration changes preserve job leases",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "completed jobs become eligible for cleanup",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "abandoned protection expires in server ticks",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "manual deny rejects protection without changing policy",
+      "passed": true,
+      "detail": null
+    }
+  ]
+}

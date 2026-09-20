@@ -1,0 +1,85 @@
+{
+  "passed": 16,
+  "checks": [
+    {
+      "test": "no players online",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "legacy config migrated to compatibility mode",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "aggressive mode reproduces remote ticking-area eviction",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "aggressive simulation cap applied",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "compatibility clears automatic denies",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "compatibility cancels pending cleanup",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "compatibility disables forced cleanup",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "compatibility restores vanilla simulation despite saved manual cap",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "compatibility restores the ticking area without a protection lease",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "interval and TPS triggers suppressed in compatibility mode",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "ticking-area chunk stays loaded and ticking",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "manual optimizer run cannot bypass compatibility",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "structure save/load succeeds remotely with compatibility mode enabled",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "compatibility survives config reload",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "nonboolean mode rejected without disabling protection",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "explicit manual unload remains an operator override",
+      "passed": true,
+      "detail": null
+    }
+  ]
+}

@@ -1,5 +1,66 @@
 # Validation
 
+## Endstone 0.11.12 update (0.3.1)
+
+BDS remains **1.26.51.1**. On Linux and Windows, the updated native binaries each
+passed 28 disposable-server checks, including startup/restart, chunk cleanup and
+restoration, saved-block preservation, protection overlap/expiry, TPS-triggered
+cleanup, and clean shutdown. Each platform bundle wheel also passed seven load,
+cleanup, and shutdown checks. The two C++ policy suites passed 20 checks each;
+all seven Python integration-helper tests passed.
+
+Evidence: `evidence/endstone-0.11.12/{linux,windows}/`. These checks used no
+connected players. The prior 0.11.11 player-session and compatibility-mode
+records below remain historical evidence; they were not rerun in full for this
+Endstone-only update. The user's structure add-on was not available to test.
+
+## 0.3.1 compatibility mode
+
+The compatibility-mode build passed 16 live checks on each of Linux and Windows
+with BDS 1.26.51.1 / Endstone 0.11.11 on 2026-09-20. Tests cover migration of the
+old configuration to the new default, reproduction of aggressive eviction,
+clearing previous rules/queued work, restoration of the full native simulation
+offsets even with a manual cap saved, and continued ticking of a remote explicit
+area without any protection lease. Interval and real-TPS threshold conditions
+were exercised with compatibility mode enabled, and neither requested eviction.
+A remote structure was saved, loaded into another chunk, and checked by its block
+contents. Config reload, invalid boolean input, and the explicit manual unload
+override were also checked.
+
+`tests/compatibility_live.py` and `evidence/compatibility-mode/` record this work.
+The 12 protection-lease checks were also rerun on each platform with compatibility
+mode explicitly disabled, confirming that the opt-in schematic integration still
+works with aggressive cleanup (56 live checks total on this build).
+These are vanilla structure-command and chunk-control checks. They do not validate
+the user's unavailable structure add-on, naturally generated custom structures,
+or repair of structures missed in existing terrain. Compatibility mode leaves
+retention and simulation to Bedrock and gives up forced chunk reduction.
+
+## 0.3.1 integration protection
+
+The protection change was built against the same pinned SDK on Linux and Windows.
+On 2026-09-20 it passed:
+
+- 20 C++ protection checks (dimensions, negative coordinates, generation margin,
+  overlapping jobs, renewal, expiry, invalid updates and bounded storage), plus
+  the 20 existing optimizer policy checks.
+- 12 live native protection checks on **each** platform, including reproduction
+  of the unprotected ticking-area eviction, restoration with saved blocks intact,
+  overlapping protections, unrelated cleanup, expiration, and manual-deny rejection.
+- Four Python command-bridge checks inside the real Endstone runtime on each
+  platform: acquire, renew, release, and confirm native release.
+- Seven isolated Python adapter tests, including missing/old/unavailable providers
+  and command errors despite a successful dispatch return.
+- All 61 existing Schematic Cloud 1.6.0 tests on a separately patched source copy.
+
+Evidence for the new live checks is under `evidence/integration-protection/`.
+The TPS-trigger check uses the existing real TPS reading with a threshold of 20
+for deterministic triggering. It does **not** measure TPS improvement or reproduce
+the production paste workload. The complete Schematic Cloud copy/paste flow with
+a player and storage service, and the user's custom behavior pack, have not been
+tested together. This is an opt-in integration, not automatic protection of all
+ticking areas. Historical release results below refer to their original binaries.
+
 Tests use the supplied Linux BDS 1.26.51.1 archive, Endstone 0.11.11's CPython 3.14 Linux wheel, and a disposable creative flat world inside Docker on Windows. The actual installed Minecraft for Windows 26.51 client was used for player tests. Binary fingerprints and research revisions are in the compatibility manifest.
 
 The original WorldChunks 0.1.0 run passed **36 automated checks**: 21 player checks, six explicit ticking-area checks, and nine generation/persistence checks. Additional checks confirmed fingerprint rejection and clean shutdown both with a fully loaded pin and with a newly requested state-0 pin plus an online player. These original results are retained under `evidence/v0.1.0/` with their original binary hash.

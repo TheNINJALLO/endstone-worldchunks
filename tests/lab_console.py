@@ -8,7 +8,7 @@ PLATFORM = os.environ.get("WORLDCHUNKS_LAB_PLATFORM", "linux")
 LAB = ROOT / "lab"
 LOG = LAB / ("windows-server.log" if PLATFORM == "windows" else "server.log")
 COMMANDS = LAB / ("windows-commands.txt" if PLATFORM == "windows" else "commands.txt")
-EVIDENCE = ROOT / "evidence" / ("windows" if PLATFORM == "windows" else "release-0.3.0")
+EVIDENCE = ROOT / "evidence" / ("windows" if PLATFORM == "windows" else "release-0.3.1")
 EVIDENCE.mkdir(parents=True, exist_ok=True)
 checks = []
 

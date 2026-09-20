@@ -29,6 +29,7 @@ check(
     and math.floor(players[0]["z"] / 16) == 0,
 )
 opt("off")
+opt("set compatibility_mode false")
 command("wc reset")
 opt("set cleanup_interval_seconds 0")
 opt("set tps_threshold 0")
@@ -178,6 +179,7 @@ opt("set tps_threshold 18")
 opt("set low_tps_seconds 5")
 opt("set tps_cooldown_seconds 30")
 opt("set batch_size 32")
+opt("set compatibility_mode true")
 opt("on")
 result = {"passed": len(checks), "checks": checks, "final_config": opt()["config"]}
 (EVIDENCE / "optimizer-live.json").write_text(json.dumps(result, indent=2) + "\n")

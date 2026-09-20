@@ -1,0 +1,29 @@
+{
+  "change": "Unreleased opt-in integration protection",
+  "date": "2026-09-20",
+  "runtime": "BDS 1.26.51.1 / Endstone 0.11.11",
+  "checks": {
+    "protection_policy": 20,
+    "optimizer_policy": 20,
+    "adapter_unit": 7,
+    "schematic_cloud_1_6_0_existing": 61,
+    "linux_live": 12,
+    "windows_live": 12,
+    "linux_bridge": 4,
+    "windows_bridge": 4
+  },
+  "limitations": [
+    "No production deployment",
+    "Custom add-on not supplied",
+    "No full player schematic/storage workflow tested",
+    "TPS trigger exercised at threshold 20; no TPS improvement benchmark"
+  ],
+  "sha256": {
+    "build/endstone_worldchunks.so": "5e82871310b4f5a13b04bb8c60cf420f3c43a61eeba82ed27724c8097cbdd6f5",
+    "build/endstone_worldchunks_optimizer.so": "e59211f143c15933b86d4c15a768048d2671bae34068934354ad284cfc5c9b27",
+    "build-windows/endstone_worldchunks.dll": "079a34a786b6e4eccfa411368a3b00d61b0d2919c0dbdec6a9ac2857149c3e07",
+    "build-windows/endstone_worldchunks_optimizer.dll": "c7a9280cc910866720af519cdf4a7f69ec2898a11938dcd4cd4f52af0bdb710e",
+    "integrations/ninjos_schematics/worldchunks_compat.py": "e079090d27958049d7652016bf516231a6bf1936e0beaaf387e2faf90e60ed7d",
+    "integrations/ninjos_schematics/schematic-cloud-1.6.0.patch": "5dd353034a697bc0cfeb712220336f077af2e4014851f4b33423fab20d2ad1f5"
+  }
+}

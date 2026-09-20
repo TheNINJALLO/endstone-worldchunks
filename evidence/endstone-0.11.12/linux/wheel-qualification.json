@@ -1,0 +1,58 @@
+{
+  "endstone": "0.11.12",
+  "bds_package": "1.26.51.1",
+  "kind": "worldchunks",
+  "platform": "linux",
+  "passed": true,
+  "artifacts": {
+    "endstone_worldchunks.so": {
+      "sha256": "b87c20b6964f55ae6cd8fe36f241db56a41043d3ab544f2ae958cbdd7c106071",
+      "size_bytes": 7886440
+    },
+    "endstone_worldchunks_optimizer.so": {
+      "sha256": "af63d3debe591c41b74330f7d34459df4da450b4905a41d893a956ddb2366e6c",
+      "size_bytes": 1747288
+    },
+    "endstone_worldchunks_bundle-0.3.1-py3-none-linux_x86_64.whl": {
+      "sha256": "52294014da02f1d39ded83d76b1a6e0338e6e67ec86b5d3e8cbe2cc5bbb82af0",
+      "size_bytes": 3342536
+    }
+  },
+  "checks": [
+    {
+      "test": "Endstone 0.11.12 startup",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "native plugin active",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "no players online",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "no-player cleanup evicts explicit ticking-area chunk",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "no-player cleanup keeps manual pin",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "disable restores explicit ticking-area chunk",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "clean shutdown",
+      "passed": true,
+      "detail": 0
+    }
+  ]
+}

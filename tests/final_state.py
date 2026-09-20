@@ -1,4 +1,4 @@
-"""Restore documented lab settings and record actual final residency."""
+"""Record aggressive-mode residency with one player, then restore compatibility mode."""
 
 import hashlib
 import json
@@ -11,6 +11,7 @@ def opt(args):
 
 
 opt("off")
+opt("set compatibility_mode false")
 command("wc reset")
 command("wc radius 2")
 opt("on")
@@ -32,7 +33,7 @@ hashes = {
     for p in build.glob("endstone_worldchunks*" + extension)
 }
 result = {
-    "version": "0.3.0",
+    "version": "0.3.1",
     "one_player_loaded_chunks": 25,
     "native": status,
     "optimizer": opt("status"),
@@ -40,3 +41,4 @@ result = {
 }
 (EVIDENCE / "final-state.json").write_text(json.dumps(result, indent=2) + "\n")
 print("PASS final residency: 25 chunks around one player")
+opt("set compatibility_mode true")

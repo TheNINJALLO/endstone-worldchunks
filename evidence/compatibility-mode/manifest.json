@@ -1,0 +1,27 @@
+{
+  "change": "Unreleased compatibility mode enabled by default",
+  "date": "2026-09-20",
+  "runtime": "BDS 1.26.51.1 / Endstone 0.11.11",
+  "checks": {
+    "linux_compatibility": 16,
+    "windows_compatibility": 16,
+    "linux_protection_regression": 12,
+    "windows_protection_regression": 12
+  },
+  "limitations": [
+    "No production deployment",
+    "Custom structure add-on unavailable",
+    "Structure commands tested; natural custom world generation not tested",
+    "Compatibility mode relinquishes forced chunk reduction",
+    "TPS threshold 20 used for deterministic trigger conditions; no performance benchmark"
+  ],
+  "sha256": {
+    "build/endstone_worldchunks.so": "d0e693c7aca839267bb0f183573462a00855328fcb4915a202ad8fa05280fecf",
+    "build/endstone_worldchunks_optimizer.so": "550be106296d91eb26c5c05c92706bca4e0a079f2e6582b0b2fab6c7d466c0d5",
+    "build-windows/endstone_worldchunks.dll": "77cb80a4fffc8bcdf32cd26845cb220a9c137b275469bccc54ba4586fac43e26",
+    "build-windows/endstone_worldchunks_optimizer.dll": "69d5796d5bb852179ece56777759d0c07fabd381a1e8c96edca96c5bbd2cf5cf",
+    "src/native.cpp": "66571b8db3cbb0359f96a5e1839d26e32cf3b02ef6d28d33d08378f9e7def93a",
+    "src/optimizer.cpp": "753c5ef64285362b2f72f7dc3f842e1887fb198c78c161b970abc761439869b6",
+    "tests/compatibility_live.py": "2a097982f5f74e7cbc08375bad94eae1e837ee52660ff7f5901fcf0af23bfcb5"
+  }
+}
