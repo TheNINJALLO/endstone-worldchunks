@@ -1,0 +1,159 @@
+{
+  "endstone": "0.11.13",
+  "bds_package": "1.26.52.3",
+  "kind": "worldchunks",
+  "platform": "linux",
+  "passed": true,
+  "artifacts": {
+    "endstone_worldchunks.so": {
+      "sha256": "cc9b792ed7953f293090e1ea47ef7a553b966b5b65d8b93bd594f16a853e1949",
+      "size_bytes": 7886440
+    },
+    "endstone_worldchunks_optimizer.so": {
+      "sha256": "3245372b6df2c98e639a65f9fec6eabbd5bcdbf42573c16b649bcd639e788f18",
+      "size_bytes": 1747288
+    }
+  },
+  "checks": [
+    {
+      "test": "Endstone 0.11.13 startup",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "native plugin active",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "no players online",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "no-player cleanup evicts explicit ticking-area chunk",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "no-player cleanup keeps manual pin",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "disable restores explicit ticking-area chunk",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "no connected players",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "explicit ticking area loads center",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "explicit ticking area center physically absent",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "explicit ticking area cannot reload denied center",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "explicit ticking area reload attempts blocked",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "explicit ticking area restore preserves saved block",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "no players online",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "reproduced automatic eviction of a ticking-area chunk",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "protection lifts previous automatic deny immediately",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "restored chunk retains saved blocks",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "overlapping lease survives another job completing",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "protection includes generation neighbors",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "unrelated ticking area still cleaned",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "TPS-triggered cleanup retains protected chunks",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "configuration changes preserve job leases",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "completed jobs become eligible for cleanup",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "abandoned protection expires in server ticks",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "manual deny rejects protection without changing policy",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "Endstone 0.11.13 startup",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "native restart",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "clean shutdown",
+      "passed": true,
+      "detail": 0
+    },
+    {
+      "test": "no unexpected runtime errors",
+      "passed": true,
+      "detail": []
+    }
+  ]
+}

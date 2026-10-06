@@ -1,6 +1,6 @@
 # Native adapter
 
-This adapter is specific to the supplied Linux BDS 1.26.51.1 executable and the Endstone 0.11.12 CPython 3.14 Linux runtime. Both complete files must match the SHA256 values in `compatibility/linux-1.26.51.1.json` before any hook is prepared. ASLR is handled by resolving module load addresses. Another Python wheel can have different private function addresses even with the same Endstone version.
+This adapter is specific to the supplied Linux BDS 1.26.52.3 executable and the Endstone 0.11.13 CPython 3.14 Linux runtime. Both complete files must match the SHA256 values in `compatibility/linux-1.26.52.3.json` before any hook is prepared. ASLR is handled by resolving module load addresses. Another Python wheel can have different private function addresses even with the same Endstone version.
 
 ## Ownership and unload
 
@@ -20,7 +20,7 @@ New distant chunks require more than a single `getOrLoadChunk` call. While a pin
 
 ## Simulation radius
 
-In the 0.3.1 companion's default compatibility mode, the native provider
+In the 0.3.2 companion's default compatibility mode, the native provider
 restores the captured vanilla offsets and ignores the configured optimizer and
 manual radius caps while the companion is enabled. It clears previous automatic
 rules and skips automatic denial, candidate eviction and view detachment. Even
@@ -56,9 +56,9 @@ Clang 20 and libc++ are essential: shared pointers and vectors cross the ABI. Th
 
 ## Repository research
 
-- [endstone](https://github.com/EndstoneMC/endstone/tree/v0.11.12): plugin API, startup lifecycle, scheduler, public loaded-chunk enumeration, native chunk-source declarations, and wrapper implementations.
+- [endstone](https://github.com/EndstoneMC/endstone/tree/v0.11.13): plugin API, startup lifecycle, scheduler, public loaded-chunk enumeration, native chunk-source declarations, and wrapper implementations.
 - [bedrock-protocol](https://github.com/EndstoneMC/bedrock-protocol): versioned codecs and chunk packet schemas. Protocol 2193 matches this server generation.
-- [protocol-docs](https://github.com/EndstoneMC/protocol-docs): documents the supplied 1.26.51.1 release. RequestChunkRadius (69), ChunkRadiusUpdated (70), and NetworkChunkPublisherUpdate (121) concern network visibility and publication; they do not release native chunk owners.
+- [protocol-docs](https://github.com/EndstoneMC/protocol-docs): documents the supplied 1.26.52.3 release. RequestChunkRadius (69), ChunkRadiusUpdated (70), and NetworkChunkPublisherUpdate (121) concern network visibility and publication; they do not release native chunk owners.
 - [protocol-dumper](https://github.com/EndstoneMC/protocol-dumper): explains the cereal/EnTT reflection pipeline behind generated packet schemas. It is a schema discovery tool, not an ownership controller; it is not preloaded into the test server.
 - [dwarf2cpp](https://github.com/EndstoneMC/dwarf2cpp): requires DWARF debug information. The supplied retail Linux ELF has no DWARF sections, so full automatic header recovery is unavailable. RTTI, vtables, unwind function boundaries, Endstone runtime symbols, disassembly, and live tests were used instead.
 - [bedrock-server-data](https://github.com/EndstoneMC/bedrock-server-data): release metadata and platform archive hashes. Both supplied ZIP files were identified and hashed, and each platform has its own verified ABI adapter.
@@ -69,7 +69,7 @@ Exact repository revisions are recorded in the compatibility manifest. The resea
 ## Windows adapter
 
 The Windows build checks its own complete executable and runtime hashes in
-`compatibility/windows-1.26.51.1.json`. It uses the MSVC C++ ABI, including the
+`compatibility/windows-1.26.52.3.json`. It uses the MSVC C++ ABI, including the
 hidden return buffer for shared pointers and the callee-owned value argument
 passed to `setLevelChunk`.
 

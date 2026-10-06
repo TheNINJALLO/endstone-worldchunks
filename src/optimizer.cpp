@@ -84,7 +84,7 @@ class WorldChunksOptimizer : public endstone::Plugin {
     {
         auto* provider = getServer().getPluginManager().getPlugin("worldchunks");
         if (!provider || !provider->isEnabled()) {
-            throw std::runtime_error("Install WorldChunks 0.3.1 alongside the optimizer");
+            throw std::runtime_error("Install WorldChunks 0.3.2 alongside the optimizer");
         }
         // Endstone loads a shadow copy with RTLD_LOCAL. Resolve the API in that
         // already loaded module, without loading a second native adapter.
@@ -108,7 +108,7 @@ class WorldChunksOptimizer : public endstone::Plugin {
         dlclose(module);
 #endif
         if (!request_) {
-            throw std::runtime_error("WorldChunks is too old: install the bundled 0.3.1 native plugin");
+            throw std::runtime_error("WorldChunks is too old: install the bundled 0.3.2 native plugin");
         }
         const auto provider_status = call({{"op", "status"}});
         if (!provider_status.contains("compatibility_mode")) {
@@ -352,7 +352,7 @@ class WorldChunksOptimizer : public endstone::Plugin {
         return true;
     }
 };
-ENDSTONE_PLUGIN("worldchunks_optimizer", "0.3.1", WorldChunksOptimizer)
+ENDSTONE_PLUGIN("worldchunks_optimizer", "0.3.2", WorldChunksOptimizer)
 {
     description = "Automatic player chunk radius and TPS-triggered cleanup for WorldChunks";
     depend = {"worldchunks"};

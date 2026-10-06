@@ -10,7 +10,7 @@ import time
 ROOT = Path(__file__).resolve().parents[1]
 LAB = ROOT / "lab"
 EXE = LAB / "windows-server/bedrock_server.exe"
-EXPECTED = "76d547f82e02c18d0986c30b47132c9cc4171d0f2df1c00649e50ff35788b321"
+EXPECTED = "19c88569af2e4b7d984e999055a31cbcb0799dacf8bbbf7371eda42f5772a443"
 assert sys.platform == "win32"
 assert hashlib.sha256(EXE.read_bytes()).hexdigest() == EXPECTED
 assert "Quit correctly" in (LAB / "windows-server.log").read_text(), (
@@ -33,7 +33,7 @@ try:
         while True:
             log = (LAB / "windows-server.log").read_text(errors="replace")
             if (
-                "Unsupported BDS binary; expected Windows 1.26.51.1" in log
+                "Unsupported BDS binary; expected Windows 1.26.52.3" in log
                 and "Server started." in log
             ):
                 break

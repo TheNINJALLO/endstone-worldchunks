@@ -1,23 +1,23 @@
 # Validation
 
-## Endstone 0.11.12 update (0.3.1)
+## Endstone 0.11.13 update (0.3.2)
 
-BDS remains **1.26.51.1**. On Linux and Windows, the updated native binaries each
+BDS remains **1.26.52.3**. On Linux and Windows, the updated native binaries each
 passed 28 disposable-server checks, including startup/restart, chunk cleanup and
 restoration, saved-block preservation, protection overlap/expiry, TPS-triggered
 cleanup, and clean shutdown. Each platform bundle wheel also passed seven load,
 cleanup, and shutdown checks. The two C++ policy suites passed 20 checks each;
 all seven Python integration-helper tests passed.
 
-Evidence: `evidence/endstone-0.11.12/{linux,windows}/`. These checks used no
+Evidence: `evidence/endstone-0.11.13/{linux,windows}/`. These checks used no
 connected players. The prior 0.11.11 player-session and compatibility-mode
 records below remain historical evidence; they were not rerun in full for this
 Endstone-only update. The user's structure add-on was not available to test.
 
-## 0.3.1 compatibility mode
+## 0.3.2 compatibility mode
 
 The compatibility-mode build passed 16 live checks on each of Linux and Windows
-with BDS 1.26.51.1 / Endstone 0.11.11 on 2026-09-20. Tests cover migration of the
+with BDS 1.26.52.3 / Endstone 0.11.11 on 2026-09-20. Tests cover migration of the
 old configuration to the new default, reproduction of aggressive eviction,
 clearing previous rules/queued work, restoration of the full native simulation
 offsets even with a manual cap saved, and continued ticking of a remote explicit
@@ -36,7 +36,7 @@ the user's unavailable structure add-on, naturally generated custom structures,
 or repair of structures missed in existing terrain. Compatibility mode leaves
 retention and simulation to Bedrock and gives up forced chunk reduction.
 
-## 0.3.1 integration protection
+## 0.3.2 integration protection
 
 The protection change was built against the same pinned SDK on Linux and Windows.
 On 2026-09-20 it passed:
@@ -61,7 +61,7 @@ a player and storage service, and the user's custom behavior pack, have not been
 tested together. This is an opt-in integration, not automatic protection of all
 ticking areas. Historical release results below refer to their original binaries.
 
-Tests use the supplied Linux BDS 1.26.51.1 archive, Endstone 0.11.11's CPython 3.14 Linux wheel, and a disposable creative flat world inside Docker on Windows. The actual installed Minecraft for Windows 26.51 client was used for player tests. Binary fingerprints and research revisions are in the compatibility manifest.
+Tests use the supplied Linux BDS 1.26.52.3 archive, Endstone 0.11.11's CPython 3.14 Linux wheel, and a disposable creative flat world inside Docker on Windows. The actual installed Minecraft for Windows 26.52 client was used for player tests. Binary fingerprints and research revisions are in the compatibility manifest.
 
 The original WorldChunks 0.1.0 run passed **36 automated checks**: 21 player checks, six explicit ticking-area checks, and nine generation/persistence checks. Additional checks confirmed fingerprint rejection and clean shutdown both with a fully loaded pin and with a newly requested state-0 pin plus an online player. These original results are retained under `evidence/v0.1.0/` with their original binary hash.
 

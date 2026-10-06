@@ -2,11 +2,11 @@
 
 Install WorldChunks and WorldChunks Optimizer from the same release, or install
 the platform wheel containing both. See the [installation instructions](../README.md#install).
-Both plugins require the matching BDS 1.26.51.1 and Endstone 0.11.12 CPython 3.14 binaries.
+Both plugins require the matching BDS 1.26.52.3 and Endstone 0.11.13 CPython 3.14 binaries.
 
 Operators configure it with `/wco`. Permission: `worldchunks.optimizer.admin`, granted to operators by default.
 
-Version 0.3.1 builds default to `compatibility_mode: true`, including migration of
+Version 0.3.2 builds default to `compatibility_mode: true`, including migration of
 existing configs that omit the field. This leaves chunk retention, generation
 neighborhoods, and player simulation to Bedrock. TPS is still sampled, but interval,
 TPS-triggered and manual `/wco run` eviction are inactive. Configured radii are

@@ -18,11 +18,11 @@ server.mkdir(exist_ok=True)
 executable = "bedrock_server.exe" if windows else "bedrock_server"
 platform = "windows" if windows else "linux"
 if not (server / executable).exists():
-    with zipfile.ZipFile(root / f"bedrock-server-{platform}-1.26.51.1.zip") as archive:
+    with zipfile.ZipFile(root / f"bedrock-server-{platform}-1.26.52.3.zip") as archive:
         archive.extractall(server)
 if not windows:
     (server / executable).chmod(0o755)
-(server / "version.txt").write_text("26.51")
+(server / "version.txt").write_text("26.52")
 plugins = server / "plugins"
 plugins.mkdir(exist_ok=True)
 extension = ".dll" if windows else ".so"
@@ -36,7 +36,7 @@ for path in list(plugins.glob("endstone_worldchunks*" + extension)) + list(
     path.unlink()
 if wheel:
     tag = "win_amd64" if windows else "linux_x86_64"
-    path = root / "dist" / f"endstone_worldchunks_bundle-0.3.1-py3-none-{tag}.whl"
+    path = root / "dist" / f"endstone_worldchunks_bundle-0.3.2-py3-none-{tag}.whl"
     shutil.copyfile(path, plugins / path.name)
 else:
     for name in ["worldchunks", "worldchunks_optimizer"]:

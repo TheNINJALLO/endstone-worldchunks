@@ -8,7 +8,7 @@ chunk on Endstone 0.11 runtimes without direct chunk tickets. Its retry and
 readback checks detect some interruptions, but do not prevent the optimizer from
 evicting those chunks again.
 
-Version 0.3.1 builds now default to **compatibility mode**: Bedrock controls retention
+Version 0.3.2 builds now default to **compatibility mode**: Bedrock controls retention
 and simulation, and WorldChunks does not force automatic chunk evictions. This
 avoids imposing the player's small keep radius on unmodified structure add-ons,
 ticking areas and generation work. It gives up automatic chunk reduction; it is

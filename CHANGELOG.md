@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.2 - Endstone 0.11.13 / Minecraft 1.26.52
+
+- Update the pinned SDK and runtime gates to Endstone 0.11.13 and BDS 1.26.52.3 / runtime 26.52.
+- Refresh native hook addresses, binary identities, and instruction fingerprints.
+- Keep network protocol 2193 and preserve earlier compatibility evidence.
+
 ## 0.3.1
 
 - Rebuild for Endstone 0.11.12 on Linux and Windows with unchanged BDS 1.26.51.1.
