@@ -423,7 +423,7 @@ struct Native::Impl {
 #ifdef _WIN32
         return p;
 #else
-        return reinterpret_cast<void* (*)(const void*)>(state.runtime + 0x158fb0)(p);
+        return reinterpret_cast<void* (*)(const void*)>(state.runtime + 0x162ee0)(p);
 #endif
     }
     void captureOffsets()
@@ -803,8 +803,8 @@ void Native::install()
     if (sha256(path.data()) != "19c88569af2e4b7d984e999055a31cbcb0799dacf8bbbf7371eda42f5772a443") {
         throw std::runtime_error("Unsupported BDS binary; expected Windows 1.26.52.3");
     }
-    if (sha256(s.runtime_path) != "f94b12fe32da2a7db4d8b89a618b4c34737fc273a4b0f5178fb62317b29cf4dc") {
-        throw std::runtime_error("Unsupported Endstone runtime; expected 0.11.13 CPython 3.14 Windows wheel");
+    if (sha256(s.runtime_path) != "2ea275dd6303656b7b538957a1f98d36238369465cd06655115df51edf14813e") {
+        throw std::runtime_error("Unsupported Endstone runtime; expected 0.11.14 CPython 3.14 Windows wheel");
     }
     s.lock = [](void* p) { AcquireSRWLockExclusive(static_cast<PSRWLOCK>(p)); };
     s.unlock = [](void* p) { ReleaseSRWLockExclusive(static_cast<PSRWLOCK>(p)); };
@@ -826,8 +826,8 @@ void Native::install()
     if (sha256("/proc/self/exe") != "0a490c711d4a2ce075debcd979e8862b7eaba008373f9970f0edbb67f98f9207") {
         throw std::runtime_error("Unsupported BDS binary; expected the supplied Linux 1.26.52.3 archive");
     }
-    if (sha256(s.runtime_path) != "1d7b8d5bdd72924829eb8f8a3c91ed0e9f6f0a028f50914bc1d86f088f66e225") {
-        throw std::runtime_error("Unsupported Endstone runtime; expected 0.11.13 CPython 3.14 Linux wheel");
+    if (sha256(s.runtime_path) != "a7d1a8a3693e5eaa91695a6469a023f77c0a88daa469014002f80ad8435d5fdf") {
+        throw std::runtime_error("Unsupported Endstone runtime; expected 0.11.14 CPython 3.14 Linux wheel");
     }
     s.lock = reinterpret_cast<Lock>(s.bds + 0x402d450);
     s.unlock = reinterpret_cast<Lock>(s.bds + 0x402d520);

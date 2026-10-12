@@ -1,0 +1,44 @@
+{
+  "platform": "linux-x86_64",
+  "endstone": "0.11.13",
+  "python_abi": "cp314",
+  "bds": "1.26.52.3",
+  "network_protocol": 2193,
+  "linux_archive_sha256": "f6348d84fa714d04ca194f207e89453ca6bba0a1359396475271a52a150471c6",
+  "windows_archive_sha256": "2c9b98d07d2504786996f2335980e88bd969b4a77514925e75471a1349995825",
+  "bds_elf_sha256": "0a490c711d4a2ce075debcd979e8862b7eaba008373f9970f0edbb67f98f9207",
+  "endstone_runtime_sha256": "1d7b8d5bdd72924829eb8f8a3c91ed0e9f6f0a028f50914bc1d86f088f66e225",
+  "bds_rva": {
+    "chunk_view_source_ctor": "0xca341f0",
+    "chunk_view_source_copy": "0xca35860",
+    "chunk_view_source_dtor": "0xca3adb0",
+    "chunk_view_source_deleting_dtor": "0xca3ade0",
+    "embedded_chunk_view_dtor": "0x51a3830",
+    "main_get_existing": "0xca0a750",
+    "main_create_new": "0xca0aa80",
+    "get_or_load": "0xca314e0",
+    "dispatch_pending_chunk_tasks": "0xca2cd50",
+    "dimension_flush_chunk_garbage_collector": "0xc969e50",
+    "native_shared_mutex_lock": "0x402d450",
+    "native_shared_mutex_unlock": "0x402d520",
+    "player_get_ticking_offsets": "0xbb5a640",
+    "level_get_ticking_offsets": "0xc8a3eb0",
+    "main_chunk_source_vtable_address_point": "0xf2efae0"
+  },
+  "runtime_rva": {
+    "dimension_get_handle": "0x1dd630",
+    "level_get_handle": "0x1de9f0",
+    "player_get_handle": "0x158fb0"
+  },
+  "sources": {
+    "endstone": "3491c609ddfde392cee2b062e3063e39aae87274",
+    "bedrock-protocol": "e15ec630d3d1fb983e8601571e54b59a886896c4",
+    "protocol-docs": "0db6185921974b5aba4a30af33a5eed842dd2cb9",
+    "protocol-dumper": "dc823fc11d69a8ed53774b1a84c99cf12e75b401",
+    "dwarf2cpp": "a7d9ff3d188c4a7d19920d76fa9ae3370fc75776",
+    "bedrock-server-data": "6a0233d17e397713c021e18ac0fbf309e06166c6",
+    "remote-dev": "f1c81922ec248dc715125af0f7c9216e13f84085"
+  },
+  "qualification_status": "qualified-disposable-server",
+  "qualification_evidence": "evidence/endstone-0.11.13/linux/qualification.json"
+}

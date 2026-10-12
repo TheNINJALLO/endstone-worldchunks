@@ -101,7 +101,7 @@ class WorldChunksPlugin : public endstone::Plugin {
             native_ = std::make_unique<worldchunks::Native>(getServer());
             native_->install();
             api_native = native_.get();
-            getLogger().info("Exact BDS 1.26.52.3 / Endstone 0.11.13 binary checks passed; chunk hooks installed.");
+            getLogger().info("Exact BDS 1.26.52.3 / Endstone 0.11.14 binary checks passed; chunk hooks installed.");
         }
         catch (const std::exception& e) {
             getLogger().error("Native adapter unavailable: {}", e.what());
@@ -272,7 +272,7 @@ class WorldChunksPlugin : public endstone::Plugin {
         return true;
     }
 };
-ENDSTONE_PLUGIN("worldchunks", "0.3.2", WorldChunksPlugin)
+ENDSTONE_PLUGIN("worldchunks", "0.3.3", WorldChunksPlugin)
 {
     description = "Native chunk residency control for the exact BDS 1.26.52.3 build";
     load = endstone::PluginLoadOrder::Startup;

@@ -1,23 +1,25 @@
 # WorldChunks
 
+> Endstone 0.11.14 release 0.3.3: This release includes verified Linux native artifacts. Windows runtime qualification remains pending for this Endstone update. The recorded validation defines the tested scope.
+
 Chunk control and automatic cleanup for Endstone.
 
 WorldChunks can unload chunks inside a player's normal ticking area, stop them from loading again, keep selected chunks loaded, and reduce player simulation distance below Bedrock's four-chunk minimum. The companion optimizer can handle cleanup around online players on a timer or when TPS drops.
 
 **New in 0.3.1:** builds default to Bedrock's normal chunk retention and simulation. Forced cleanup and reduced simulation are opt-in because they can interrupt add-on structure generation and ticking-area jobs.
 
-Built for **Endstone 0.11.13 and Bedrock Dedicated Server 1.26.52.3**. Native hooks are tied to a specific server build; see the [Linux](compatibility/linux-1.26.52.3.json) and [Windows](compatibility/windows-1.26.52.3.json) compatibility manifests. Network protocol remains **2193**.
+Version 0.3.3 targets **Endstone 0.11.14 and Bedrock Dedicated Server 1.26.52.3**. Native hooks are tied to a specific server build; see the [Linux](compatibility/linux-1.26.52.3.json) and [Windows](compatibility/windows-1.26.52.3.json) compatibility manifests. Network protocol remains **2193**. This release publishes the verified Linux artifacts. Linux live checks passed; Windows DLLs and the bundle wheel built, with live runtime qualification pending.
 
 ## Install
 
-Download [WorldChunks 0.3.2](https://github.com/TheNINJALLO/endstone-worldchunks/releases/tag/v0.3.2) for Endstone 0.11.13. Use the matching rebuilt native files or bundle wheel. Published 0.3.0 files target Endstone 0.11.11.
+Download the verified Linux artifacts from [WorldChunks 0.3.3](https://github.com/TheNINJALLO/endstone-worldchunks/releases/tag/v0.3.3). The published [WorldChunks 0.3.2](https://github.com/TheNINJALLO/endstone-worldchunks/releases/tag/v0.3.2) remains the release for Endstone 0.11.13. Published 0.3.0 files target Endstone 0.11.11.
 
-Use Python 3.14 with `endstone==0.11.13`. The Linux binaries require glibc 2.34 or newer. Choose one installation format:
+Use Python 3.14 with `endstone==0.11.14`. The Linux binaries require glibc 2.34 or newer. Choose one installation format:
 
 | Platform | Native files | Wheel containing both plugins |
 | --- | --- | --- |
-| Linux x86-64 | `endstone_worldchunks.so` and `endstone_worldchunks_optimizer.so` | `endstone_worldchunks_bundle-0.3.2-py3-none-linux_x86_64.whl` |
-| Windows x86-64 | `endstone_worldchunks.dll` and `endstone_worldchunks_optimizer.dll` | `endstone_worldchunks_bundle-0.3.2-py3-none-win_amd64.whl` |
+| Linux x86-64 | `endstone_worldchunks.so` and `endstone_worldchunks_optimizer.so` | `endstone_worldchunks_bundle-0.3.3-py3-none-linux_x86_64.whl` |
+| Windows x86-64 | Source builds only; live qualification pending | No Windows artifacts published in 0.3.3 |
 
 Copy either the two native files or the matching wheel into `plugins/`.
 Remove older WorldChunks files before switching formats or updating the wheel.
@@ -84,7 +86,7 @@ The [command reference](docs/commands.md) lists every command and permission. Th
 
 See [building and packaging](docs/building.md), [native implementation](docs/native-design.md), and [test results](docs/validation.md).
 
-The 0.3.2 native builds and wheels passed disposable-server checks on Linux and Windows, including cleanup, saved blocks, protection, TPS-triggered cleanup, and restart persistence. Connected-client checks from the prior Endstone 0.11.11 build remain historical evidence; no connected-client session was used for the 0.11.13 update. Tests and their limits are recorded in the validation document.
+The 0.3.3 Linux native build passed disposable-server checks for cleanup, saved blocks, protection and TPS-triggered cleanup on Endstone 0.11.14. Twenty optimizer policy checks, twenty protection policy checks and seven Python compatibility tests passed. Windows native compilation and runtime identity mapping passed, but its CPython 3.14 runtime fixture timed out during startup. Evidence is under `evidence/endstone-0.11.14/`. The earlier 0.3.2 Linux/Windows and connected-client results remain historical evidence; no connected-client session was used for this update.
 
 ## License
 

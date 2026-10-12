@@ -95,7 +95,7 @@ try:
         "temporary_container_cpus": 0.02,
         "cpu_limit_restored": restored.is_set(),
     }
-    (ROOT / "evidence/release-0.3.2/optimizer-tps-stress.json").write_text(
+    (ROOT / "evidence/release-0.3.3/optimizer-tps-stress.json").write_text(
         json.dumps(result, indent=2) + "\n"
     )
     print(json.dumps(result), flush=True)

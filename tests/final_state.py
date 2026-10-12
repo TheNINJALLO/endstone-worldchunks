@@ -33,7 +33,7 @@ hashes = {
     for p in build.glob("endstone_worldchunks*" + extension)
 }
 result = {
-    "version": "0.3.2",
+    "version": "0.3.3",
     "one_player_loaded_chunks": 25,
     "native": status,
     "optimizer": opt("status"),

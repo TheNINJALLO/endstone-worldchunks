@@ -9,13 +9,13 @@ import io
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "0.3.2"
+VERSION = "0.3.3"
 
 
-def build(platform):
+def build(platform, build_dir=None, output_dir=None):
     windows = platform == "win_amd64"
     extension = ".dll" if windows else ".so"
-    build_dir = ROOT / ("build-windows" if windows else "build")
+    build_dir = Path(build_dir) if build_dir else ROOT / ("build-windows" if windows else "build")
     package = "endstone_worldchunks_bundle"
     info = f"{package}-{VERSION}.dist-info"
     tag = f"py3-none-{platform}"
@@ -30,7 +30,7 @@ def build(platform):
             "Summary: Native chunk control and automatic cleanup for Endstone\n"
             "License: MIT\n"
             "Requires-Python: >=3.14,<3.15\n"
-            "Requires-Dist: endstone==0.11.13\n"
+            "Requires-Dist: endstone==0.11.14\n"
             "Project-URL: Source, https://github.com/TheNINJALLO/endstone-worldchunks\n\n"
         ).encode(),
         f"{info}/WHEEL": (
@@ -64,8 +64,8 @@ def build(platform):
         writer.writerow([name, f"sha256={digest}", len(data)])
     writer.writerow([f"{info}/RECORD", "", ""])
     files[f"{info}/RECORD"] = records.getvalue().encode()
-    destination = ROOT / "dist" / f"{package}-{VERSION}-{tag}.whl"
-    destination.parent.mkdir(exist_ok=True)
+    destination = (Path(output_dir) if output_dir else ROOT / "dist") / f"{package}-{VERSION}-{tag}.whl"
+    destination.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(destination, "w", zipfile.ZIP_DEFLATED) as archive:
         for name, data in sorted(files.items()):
             entry = zipfile.ZipInfo(name, (2026, 9, 19, 0, 0, 0))
@@ -79,4 +79,7 @@ def build(platform):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("platform", choices=["linux_x86_64", "win_amd64"])
-    build(parser.parse_args().platform)
+    parser.add_argument("--build-dir", type=Path)
+    parser.add_argument("--output-dir", type=Path)
+    args = parser.parse_args()
+    build(args.platform, args.build_dir, args.output_dir)

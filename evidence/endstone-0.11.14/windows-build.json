@@ -1,0 +1,7 @@
+{
+  "build_passed": true,
+  "endstone": "0.11.14",
+  "bds_package": "1.26.52.3",
+  "runtime_qualification": "pending",
+  "reason": "The CPython 3.14 Windows runtime fixture timed out during startup; the native DLL build and runtime-identity mapping passed. No Windows live compatibility claim is made."
+}
