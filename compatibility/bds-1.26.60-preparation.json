@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "project": "endstone-worldchunks",
+  "game_version": "1.26.60",
+  "bds_package": "1.26.60.6",
+  "bds_runtime": "26.60",
+  "bds_runtime_status": "Expected from the official package version; matching Endstone runtime validation pending",
+  "network_protocol": null,
+  "endstone": {
+    "minimum_version": "0.11.11",
+    "requirement": ">=0.11.11",
+    "maximum_version": null,
+    "api_version": "0.11",
+    "build_version": null,
+    "source_tag": null,
+    "source_commit": null,
+    "runtime": null
+  },
+  "status": "pending-endstone-native-qualification",
+  "native_release_ready": false,
+  "publication_status": "local-unpublished",
+  "qualified_platforms": [],
+  "server_files": {
+    "windows-x64": {
+      "archive": {
+        "filename": "bedrock-server-windows-x64-1.26.60.6.zip",
+        "sha256": "21620db4f80d0fe206f21cb08f52f4e5f14252ce865ec49ccfbe0d9f93ce88b0",
+        "size_bytes": 88759231
+      },
+      "executable": {
+        "filename": "bedrock_server.exe",
+        "sha256": "d7b26d6c5e8f3e910f66e8cbf7e1dfde06e570032349bf7abdd070deb6e9d884",
+        "size_bytes": 232647024,
+        "format": "PE32+"
+      }
+    },
+    "linux-x64": {
+      "archive": {
+        "filename": "bedrock-server-linux-x64-1.26.60.6.zip",
+        "sha256": "cbbd5414fa6a310353ed1fc76a0ba691c3fd1ea852fd04bb76764ee4c1afdb98",
+        "size_bytes": 98094690
+      },
+      "executable": {
+        "filename": "bedrock_server",
+        "sha256": "ea16b541a448e07c337848d2c5f37321b706554b5216dd942f3f11e7a8ed2bad",
+        "size_bytes": 265500280,
+        "format": "ELF64",
+        "gnu_build_id": "52576b75b6af5a09a6bde582be804e29657dbbf3"
+      }
+    }
+  },
+  "provenance": {
+    "download_page": "https://www.minecraft.net/en-us/download/server/bedrock",
+    "download_api": "https://net-secondary.web.minecraft-services.net/api/v1.0/download/links",
+    "download_urls": {
+      "windows-x64": "https://www.minecraft.net/bedrockdedicatedserver/bin-win/bedrock-server-1.26.60.6.zip",
+      "linux-x64": "https://www.minecraft.net/bedrockdedicatedserver/bin-linux/bedrock-server-1.26.60.6.zip"
+    },
+    "archive_checksums_verified": true,
+    "checked_on": "2026-10-27"
+  },
+  "prepared_hooks": {
+    "linux-x64": "compatibility/hooks-1.26.60-linux-x64.json",
+    "windows-x64": "compatibility/hooks-1.26.60-windows-x64.json"
+  },
+  "qualification_required": [
+    "Obtain an Endstone SDK and runtime supporting BDS 1.26.60.6; record its actual version, commit, Python ABI, and binary identities",
+    "Review changed BDS functions, object layouts, virtual slots, and callsite contracts recorded in the prepared hook manifest",
+    "Relocate and fingerprint private Endstone functions against the new runtime; do not reuse the 0.11.14 addresses",
+    "Rebuild the native plugin and matching Python bridge against that exact SDK and Python ABI",
+    "Run disposable-server load, gameplay, persistence, restart, and clean-shutdown regressions before marking any platform qualified",
+    "Keep this preparation unpublished until native qualification passes and release is separately requested"
+  ],
+  "policy": "Preparation only. Recorded BDS addresses and bytes do not establish ABI compatibility or authorize release. Existing build defaults and exact runtime gates remain on the previous target."
+}

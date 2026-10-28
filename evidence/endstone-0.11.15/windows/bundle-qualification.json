@@ -1,0 +1,58 @@
+{
+  "endstone": "0.11.15",
+  "bds_package": "1.26.60.6",
+  "kind": "worldchunks",
+  "platform": "windows",
+  "passed": true,
+  "artifacts": {
+    "endstone_worldchunks.dll": {
+      "sha256": "301f9fdb116708b152eca9c7df639e4a195889197944752526cc7e48aca43a37",
+      "size_bytes": 767488
+    },
+    "endstone_worldchunks_optimizer.dll": {
+      "sha256": "b0dfcfef515c31190ce7b8b7ab929d74493f46b761d135424147d80a51e54813",
+      "size_bytes": 593920
+    },
+    "endstone_worldchunks_bundle-0.3.4-py3-none-win_amd64.whl": {
+      "sha256": "686db9edbf97751bfc33c170814f159decaf197308e4d10b0a708c63f5961739",
+      "size_bytes": 580359
+    }
+  },
+  "checks": [
+    {
+      "test": "Endstone 0.11.15 startup",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "native plugin active",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "no players online",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "no-player cleanup evicts explicit ticking-area chunk",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "no-player cleanup keeps manual pin",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "disable restores explicit ticking-area chunk",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "clean shutdown",
+      "passed": true,
+      "detail": 0
+    }
+  ]
+}

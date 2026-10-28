@@ -1,3 +1,11 @@
+# Minecraft 26.60 / Endstone 0.11.15 qualification - 2026-10-28
+
+WorldChunks **0.3.4** targets BDS **1.26.60.6**, protocol **2225**, CPython **3.14**. Linux and Windows native and bundle-wheel deployments passed cleanup, restoration, saved-block, protection overlap/expiry, save/query/resume, and persisted-block restart checks. Each deployment stopped cleanly. Twenty optimizer-policy checks, twenty protection-policy checks, and ten isolated Python tests passed. No connected-player session was used. Qualification uses `enable-script=true`.
+
+Current evidence: `evidence/endstone-0.11.15/`. Earlier records below retain their original targets and scope.
+
+---
+
 # Validation
 
 ## Endstone 0.11.13 update (0.3.2)

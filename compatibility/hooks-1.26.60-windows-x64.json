@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "project": "endstone-worldchunks",
+  "bds_package": "1.26.60.6",
+  "platform": "windows-x64",
+  "status": "offline-preparation-only",
+  "native_adapter_qualified": false,
+  "native_release_ready": false,
+  "endstone_runtime": null,
+  "executable": {
+    "filename": "bedrock_server.exe",
+    "sha256": "d7b26d6c5e8f3e910f66e8cbf7e1dfde06e570032349bf7abdd070deb6e9d884",
+    "size_bytes": 232647024,
+    "format": "PE32+"
+  },
+  "qualification_required": [
+    "Obtain an Endstone SDK and runtime supporting BDS 1.26.60.6; record its actual version, commit, Python ABI, and binary identities",
+    "Review changed BDS functions, object layouts, virtual slots, and callsite contracts recorded in the prepared hook manifest",
+    "Relocate and fingerprint private Endstone functions against the new runtime; do not reuse the 0.11.14 addresses",
+    "Rebuild the native plugin and matching Python bridge against that exact SDK and Python ABI",
+    "Run disposable-server load, gameplay, persistence, restart, and clean-shutdown regressions before marking any platform qualified",
+    "Keep this preparation unpublished until native qualification passes and release is separately requested"
+  ],
+  "sites": [
+    {
+      "previous_address": "0x9e78b0",
+      "uses": [
+        "endstone-worldchunks/chunk_view_update"
+      ],
+      "method": "normalized-instructions:64",
+      "review_required": true,
+      "status": "mapped-offline",
+      "address": "0x2e363f0",
+      "file_offset": 48453616,
+      "bytes": "5541574156415541545657534881eca8010000488dac2480000000440f299510"
+    },
+    {
+      "previous_address": "0x9e8d00",
+      "uses": [
+        "endstone-worldchunks/chunk_view_source_copy"
+      ],
+      "method": "interior instruction anchors plus ChunkViewSource virtual-table initialization reference",
+      "review_required": true,
+      "status": "mapped-offline",
+      "address": "0xbf1820",
+      "file_offset": 12520480,
+      "bytes": "5541574156415541545657534881ecf8010000488dac248000000048c7857001"
+    },
+    {
+      "previous_address": "0xa15f60",
+      "uses": [
+        "endstone-worldchunks/chunk_grid_destructor"
+      ],
+      "method": "normalized-instructions:384",
+      "review_required": true,
+      "status": "mapped-offline",
+      "address": "0xbff570",
+      "file_offset": 12577136,
+      "bytes": "415741565657534883ec304889ce488b79484885ff0f849a0000004c8d76484c"
+    },
+    {
+      "previous_address": "0x38dd8d0",
+      "uses": [
+        "endstone-worldchunks/main_get_existing"
+      ],
+      "method": "interior anchors and function alignment",
+      "review_required": true,
+      "status": "mapped-offline",
+      "address": "0x3149990",
+      "file_offset": 51678608,
+      "bytes": "56450fb60849bb25232284e49cf2cb4d31d948b8b3010000000100004c0fafc8"
+    },
+    {
+      "previous_address": "0x38ddc20",
+      "uses": [
+        "endstone-worldchunks/main_create_new"
+      ],
+      "method": "normalized-instructions:64",
+      "review_required": true,
+      "status": "mapped-offline",
+      "address": "0x3149ce0",
+      "file_offset": 51679456,
+      "bytes": "5556574883ec50488d6c245048c745f8feffffff4c89c64889cf0fb645408844"
+    },
+    {
+      "previous_address": "0x9e4900",
+      "uses": [
+        "endstone-worldchunks/get_or_load"
+      ],
+      "method": "shared ChunkSource get-or-load virtual method at ordinal 8 in mapped main table",
+      "review_required": true,
+      "status": "mapped-offline",
+      "address": "0xbed420",
+      "file_offset": 12503072,
+      "bytes": "5541574156415541545657534881ec08010000488dac248000000048c7858000"
+    },
+    {
+      "previous_address": "0x9ddb10",
+      "uses": [
+        "endstone-worldchunks/dispatch_pending_chunk_tasks"
+      ],
+      "method": "matching direct calls from independently mapped chunk task callers",
+      "review_required": true,
+      "status": "mapped-offline",
+      "address": "0xbe7710",
+      "file_offset": 12479248,
+      "bytes": "4157415641554154565755534883ec680fb64148a8010f857503000089d34889"
+    },
+    {
+      "previous_address": "0x7db1b0",
+      "uses": [
+        "endstone-worldchunks/level_get_ticking_offsets"
+      ],
+      "method": "Level getter virtual slot recovered from adjacent independently mapped virtual methods",
+      "review_required": true,
+      "status": "mapped-offline",
+      "address": "0x7cb7f0",
+      "file_offset": 8170480,
+      "bytes": "488b8158060000c3cccccccccccccccc488b81580600004883c018c3cccccccc"
+    },
+    {
+      "previous_address": "0xa80e090",
+      "uses": [
+        "endstone-worldchunks/main_chunk_source_vtable"
+      ],
+      "method": "independently mapped virtual-function ordinals",
+      "review_required": true,
+      "status": "mapped-offline",
+      "address": "0xaeed9a0",
+      "file_offset": 183420832,
+      "bytes": "90ba17430100000080d2be4001000000a0d2be40010000009099144301000000"
+    },
+    {
+      "previous_address": "0xa71b330",
+      "uses": [
+        "endstone-worldchunks/chunk_view_source_vtable"
+      ],
+      "method": "mapped virtual functions including leaf methods without unwind metadata",
+      "review_required": true,
+      "status": "mapped-offline",
+      "address": "0xae05e20",
+      "file_offset": 182471712,
+      "bytes": "002cc0400100000080d2be4001000000a0d2be40010000009025bf4001000000"
+    }
+  ],
+  "source_reference": {
+    "bds": "1.26.52.3",
+    "endstone": "0.11.14",
+    "source_files": {
+      "src/native.cpp": "2410c0d97f7ecd78c229157a53819092bde6a460bb46838ebafe5869ebb8a0bd"
+    }
+  }
+}

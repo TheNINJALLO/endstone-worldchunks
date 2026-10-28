@@ -9,7 +9,7 @@ import io
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "0.3.3"
+VERSION = "0.3.4"
 
 
 def build(platform, build_dir=None, output_dir=None):
@@ -30,7 +30,7 @@ def build(platform, build_dir=None, output_dir=None):
             "Summary: Native chunk control and automatic cleanup for Endstone\n"
             "License: MIT\n"
             "Requires-Python: >=3.14,<3.15\n"
-            "Requires-Dist: endstone==0.11.14\n"
+            "Requires-Dist: endstone==0.11.15\n"
             "Project-URL: Source, https://github.com/TheNINJALLO/endstone-worldchunks\n\n"
         ).encode(),
         f"{info}/WHEEL": (

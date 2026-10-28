@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.4 - 2026-10-28
+
+Update the exact native target to Minecraft 26.60 / BDS 1.26.60.6 and Endstone 0.11.15 (CPython 3.14). Refresh private addresses, instruction guards, and changed object layouts. Qualification evidence records the executed runtime checks.
+
 ## 0.3.2 - Endstone 0.11.13 / Minecraft 1.26.52
 
 - Update the pinned SDK and runtime gates to Endstone 0.11.13 and BDS 1.26.52.3 / runtime 26.52.

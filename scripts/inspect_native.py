@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 im = Image(
     Path(sys.argv[1])
     if len(sys.argv) > 1
-    else ROOT.parent / ".build-inputs/bds-1.26.52-linux/bedrock_server"
+    else ROOT.parent / ".build-inputs/bds-1.26.60-linux/bedrock_server"
 )
 tables = {}
 for start, end, offset, section in im.sections:

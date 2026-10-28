@@ -2,7 +2,7 @@
 
 Install WorldChunks and WorldChunks Optimizer from the same release, or install
 the platform wheel containing both. See the [installation instructions](../README.md#install).
-Both plugins require the matching BDS 1.26.52.3 and Endstone 0.11.13 CPython 3.14 binaries.
+Both plugins require the matching BDS 1.26.60.6 and Endstone 0.11.13 CPython 3.14 binaries.
 
 Operators configure it with `/wco`. Permission: `worldchunks.optimizer.admin`, granted to operators by default.
 

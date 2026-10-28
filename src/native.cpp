@@ -312,7 +312,7 @@ void viewUpdateHook(void* self, const void* bounds)
     uintptr_t vtable{};
     SIZE_T count{};
     if (ReadProcessMemory(GetCurrentProcess(), view, &vtable, sizeof(vtable), &count) && count == sizeof(vtable) &&
-        vtable == active->bds + 0xa71b330) {
+        vtable == active->bds + 0xae05e20) {
         std::lock_guard guard(active->views_mutex);
         if (active->views.insert(view).second) {
             ++active->constructors;
@@ -423,7 +423,7 @@ struct Native::Impl {
 #ifdef _WIN32
         return p;
 #else
-        return reinterpret_cast<void* (*)(const void*)>(state.runtime + 0x162ee0)(p);
+        return reinterpret_cast<void* (*)(const void*)>(state.runtime + 0x175ca0)(p);
 #endif
     }
     void captureOffsets()
@@ -800,11 +800,11 @@ void Native::install()
     if (!GetModuleFileNameA(nullptr, path.data(), static_cast<DWORD>(path.size()))) {
         throw std::runtime_error("Cannot locate BDS");
     }
-    if (sha256(path.data()) != "19c88569af2e4b7d984e999055a31cbcb0799dacf8bbbf7371eda42f5772a443") {
-        throw std::runtime_error("Unsupported BDS binary; expected Windows 1.26.52.3");
+    if (sha256(path.data()) != "d7b26d6c5e8f3e910f66e8cbf7e1dfde06e570032349bf7abdd070deb6e9d884") {
+        throw std::runtime_error("Unsupported BDS binary; expected Windows 1.26.60.6");
     }
-    if (sha256(s.runtime_path) != "2ea275dd6303656b7b538957a1f98d36238369465cd06655115df51edf14813e") {
-        throw std::runtime_error("Unsupported Endstone runtime; expected 0.11.14 CPython 3.14 Windows wheel");
+    if (sha256(s.runtime_path) != "3af2cd963fff8597c2b649e75116867e667b60d6fcce5e7d82130ce8cc89873b") {
+        throw std::runtime_error("Unsupported Endstone runtime; expected 0.11.15 CPython 3.14 Windows wheel");
     }
     s.lock = [](void* p) { AcquireSRWLockExclusive(static_cast<PSRWLOCK>(p)); };
     s.unlock = [](void* p) { ReleaseSRWLockExclusive(static_cast<PSRWLOCK>(p)); };
@@ -812,38 +812,38 @@ void Native::install()
     if (!s.hooks) {
         throw std::runtime_error("Cannot allocate native hooks");
     }
-    hook(s, s.view_update, 0x9e78b0, viewUpdateHook);
-    hook(s, s.copy, 0x9e8d00, copyHook);
-    hook(s, s.view_dtor, 0xa15f60, gridDtorHook);
-    hook(s, s.main_get, 0x38dd8d0, getHook);
-    hook(s, s.main_create, 0x38ddc20, createHook);
-    hook(s, s.get_or_load, 0x9e4900, loadHook);
+    hook(s, s.view_update, 0xbf0160, viewUpdateHook);
+    hook(s, s.copy, 0xbf1820, copyHook);
+    hook(s, s.view_dtor, 0xbff570, gridDtorHook);
+    hook(s, s.main_get, 0x3149990, getHook);
+    hook(s, s.main_create, 0x3149ce0, createHook);
+    hook(s, s.get_or_load, 0xbed420, loadHook);
 #else
     dl_iterate_phdr(modules, &s);
     if (!s.runtime) {
         throw std::runtime_error("Endstone runtime module is missing");
     }
-    if (sha256("/proc/self/exe") != "0a490c711d4a2ce075debcd979e8862b7eaba008373f9970f0edbb67f98f9207") {
-        throw std::runtime_error("Unsupported BDS binary; expected the supplied Linux 1.26.52.3 archive");
+    if (sha256("/proc/self/exe") != "ea16b541a448e07c337848d2c5f37321b706554b5216dd942f3f11e7a8ed2bad") {
+        throw std::runtime_error("Unsupported BDS binary; expected the supplied Linux 1.26.60.6 archive");
     }
-    if (sha256(s.runtime_path) != "a7d1a8a3693e5eaa91695a6469a023f77c0a88daa469014002f80ad8435d5fdf") {
-        throw std::runtime_error("Unsupported Endstone runtime; expected 0.11.14 CPython 3.14 Linux wheel");
+    if (sha256(s.runtime_path) != "a4e59b0a02760cd5ab87784d71a3cbbf99a7c287484b0163da91a91ca3bf791c") {
+        throw std::runtime_error("Unsupported Endstone runtime; expected 0.11.15 CPython 3.14 Linux wheel");
     }
-    s.lock = reinterpret_cast<Lock>(s.bds + 0x402d450);
-    s.unlock = reinterpret_cast<Lock>(s.bds + 0x402d520);
+    s.lock = reinterpret_cast<Lock>(s.bds + 0x41fe1d0);
+    s.unlock = reinterpret_cast<Lock>(s.bds + 0x41fe2a0);
     s.hooks = funchook_create();
     if (!s.hooks) {
         throw std::runtime_error("Cannot allocate native hooks");
     }
-    hook(s, s.ctor, 0xca341f0, ctorHook);
-    hook(s, s.copy, 0xca35860, copyHook);
-    hook(s, s.dtor, 0xca3adb0, dtorHook);
-    hook(s, s.deleting_dtor, 0xca3ade0, deletingDtorHook);
-    hook(s, s.view_dtor, 0x51a3830, viewDtorHook);
-    hook(s, s.main_get, 0xca0a750, getHook);
-    hook(s, s.main_create, 0xca0aa80, createHook);
-    hook(s, s.get_or_load, 0xca314e0, loadHook);
-    s.tick_offsets = reinterpret_cast<TickOffsets>(s.bds + 0xbb5a640);
+    hook(s, s.ctor, 0xcfe3560, ctorHook);
+    hook(s, s.copy, 0xcfe4950, copyHook);
+    hook(s, s.dtor, 0xcfe96b0, dtorHook);
+    hook(s, s.deleting_dtor, 0xcfe96e0, deletingDtorHook);
+    hook(s, s.view_dtor, 0x53231c0, viewDtorHook);
+    hook(s, s.main_get, 0xcfbbd10, getHook);
+    hook(s, s.main_create, 0xcfbbf10, createHook);
+    hook(s, s.get_or_load, 0xcfe0bc0, loadHook);
+    s.tick_offsets = reinterpret_cast<TickOffsets>(s.bds + 0xbcf8110);
 #endif
     active = &s;
     if (funchook_install(s.hooks, 0) != 0) {

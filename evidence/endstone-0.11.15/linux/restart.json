@@ -1,0 +1,28 @@
+{
+  "passed": true,
+  "endstone": "0.11.15",
+  "bds_package": "1.26.60.6",
+  "kind": "worldchunks",
+  "platform": "linux",
+  "variant": "",
+  "saved_block_survived_restart": true,
+  "clean_shutdowns": 2,
+  "deployment_inputs": {
+    "endstone_worldchunks_optimizer.so": "eb899f89cb7b2eb36dccd7ddfee534fdc708010567ef02fa07a697027082c163",
+    "endstone_worldchunks.so": "7a2ff81ccb9e16666ac8c2815cfd3c885a1f1f50e80dbf91403544c59d5aab7e"
+  },
+  "checks": [
+    {
+      "phase": "save",
+      "passed": true,
+      "log": "persistence-save.log",
+      "log_sha256": "1fe2d0e1b3092527ada3606f63038e74b9319ca2c4988bd8eef86f3943e21fc4"
+    },
+    {
+      "phase": "restart",
+      "passed": true,
+      "log": "persistence-restart.log",
+      "log_sha256": "6b79755d0446e037b09dbf0d242a74d400a1f818f990c18fd98783d28278511b"
+    }
+  ]
+}

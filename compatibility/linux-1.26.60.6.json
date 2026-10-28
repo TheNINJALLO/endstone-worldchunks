@@ -1,0 +1,47 @@
+{
+  "platform": "linux-x86_64",
+  "endstone": "0.11.15",
+  "python_abi": "cp314",
+  "bds": "1.26.60.6",
+  "network_protocol": 2225,
+  "linux_archive_sha256": "cbbd5414fa6a310353ed1fc76a0ba691c3fd1ea852fd04bb76764ee4c1afdb98",
+  "windows_archive_sha256": "21620db4f80d0fe206f21cb08f52f4e5f14252ce865ec49ccfbe0d9f93ce88b0",
+  "bds_elf_sha256": "ea16b541a448e07c337848d2c5f37321b706554b5216dd942f3f11e7a8ed2bad",
+  "endstone_runtime_sha256": "a4e59b0a02760cd5ab87784d71a3cbbf99a7c287484b0163da91a91ca3bf791c",
+  "bds_rva": {
+    "chunk_view_source_ctor": "0xcfe3560",
+    "chunk_view_source_copy": "0xcfe4950",
+    "chunk_view_source_dtor": "0xcfe96b0",
+    "chunk_view_source_deleting_dtor": "0xcfe96e0",
+    "embedded_chunk_view_dtor": "0x53231c0",
+    "main_get_existing": "0xcfbbd10",
+    "main_create_new": "0xcfbbf10",
+    "get_or_load": "0xcfe0bc0",
+    "dispatch_pending_chunk_tasks": "0xcfdc9f0",
+    "dimension_flush_chunk_garbage_collector": "0xcf20f30",
+    "native_shared_mutex_lock": "0x41fe1d0",
+    "native_shared_mutex_unlock": "0x41fe2a0",
+    "player_get_ticking_offsets": "0xbcf8110",
+    "level_get_ticking_offsets": "0xce3a0e0",
+    "main_chunk_source_vtable_address_point": "0xfbcee98"
+  },
+  "runtime_rva": {
+    "dimension_get_handle": "0x1fbfd0",
+    "level_get_handle": "0x1fd360",
+    "player_get_handle": "0x175ca0"
+  },
+  "sources": {
+    "endstone": "b4aaa87d2c5305e7d340168f824ac2e2ea722e44",
+    "bedrock-protocol": "e15ec630d3d1fb983e8601571e54b59a886896c4",
+    "protocol-docs": "0db6185921974b5aba4a30af33a5eed842dd2cb9",
+    "protocol-dumper": "dc823fc11d69a8ed53774b1a84c99cf12e75b401",
+    "dwarf2cpp": "a7d9ff3d188c4a7d19920d76fa9ae3370fc75776",
+    "bedrock-server-data": "6a0233d17e397713c021e18ac0fbf309e06166c6",
+    "remote-dev": "f1c81922ec248dc715125af0f7c9216e13f84085"
+  },
+  "qualification_status": "qualified",
+  "qualification_evidence": "evidence/endstone-0.11.15/linux/qualification.json",
+  "runtime_configuration": {
+    "enable-script": true
+  }
+}

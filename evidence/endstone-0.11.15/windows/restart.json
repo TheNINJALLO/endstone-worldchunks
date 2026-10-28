@@ -1,0 +1,28 @@
+{
+  "passed": true,
+  "endstone": "0.11.15",
+  "bds_package": "1.26.60.6",
+  "kind": "worldchunks",
+  "platform": "windows",
+  "variant": "",
+  "saved_block_survived_restart": true,
+  "clean_shutdowns": 2,
+  "deployment_inputs": {
+    "endstone_worldchunks.dll": "301f9fdb116708b152eca9c7df639e4a195889197944752526cc7e48aca43a37",
+    "endstone_worldchunks_optimizer.dll": "b0dfcfef515c31190ce7b8b7ab929d74493f46b761d135424147d80a51e54813"
+  },
+  "checks": [
+    {
+      "phase": "save",
+      "passed": true,
+      "log": "persistence-save.log",
+      "log_sha256": "6bcd637b1612d28c79a0680fcfeea593fd884c91661571d5475447bf418f9b24"
+    },
+    {
+      "phase": "restart",
+      "passed": true,
+      "log": "persistence-restart.log",
+      "log_sha256": "f9f0ede7b208f602ef765f6d475481a4a31dad18a5db46b275b3daa98f214fd5"
+    }
+  ]
+}

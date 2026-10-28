@@ -1,0 +1,33 @@
+{
+  "platform": "windows-x86_64",
+  "endstone": "0.11.15",
+  "python_abi": "cp314",
+  "bds": "1.26.60.6",
+  "network_protocol": 2225,
+  "bds_exe_sha256": "d7b26d6c5e8f3e910f66e8cbf7e1dfde06e570032349bf7abdd070deb6e9d884",
+  "endstone_runtime_sha256": "3af2cd963fff8597c2b649e75116867e667b60d6fcce5e7d82130ce8cc89873b",
+  "bds_rva": {
+    "chunk_view_update": "0xbf0160",
+    "chunk_view_source_copy": "0xbf1820",
+    "chunk_grid_destructor": "0xbff570",
+    "main_get_existing": "0x3149990",
+    "main_create_new": "0x3149ce0",
+    "get_or_load": "0xbed420",
+    "dispatch_pending_chunk_tasks": "0xbe7710",
+    "level_get_ticking_offsets": "0x7cb7f0",
+    "main_chunk_source_vtable": "0xaeed9a0",
+    "chunk_view_source_vtable": "0xae05e20"
+  },
+  "runtime_rva": {
+    "dimension_get_handle": "0x165880",
+    "level_get_handle": "0x93460"
+  },
+  "sources": {
+    "endstone": "b4aaa87d2c5305e7d340168f824ac2e2ea722e44"
+  },
+  "qualification_status": "qualified",
+  "qualification_evidence": "evidence/endstone-0.11.15/windows/qualification.json",
+  "runtime_configuration": {
+    "enable-script": true
+  }
+}

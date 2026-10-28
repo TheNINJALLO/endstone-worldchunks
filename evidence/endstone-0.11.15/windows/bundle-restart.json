@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "endstone": "0.11.15",
+  "bds_package": "1.26.60.6",
+  "kind": "worldchunks",
+  "platform": "windows",
+  "variant": "-wheel",
+  "saved_block_survived_restart": true,
+  "clean_shutdowns": 2,
+  "deployment_inputs": {
+    "endstone_worldchunks_bundle-0.3.4-py3-none-win_amd64.whl": "686db9edbf97751bfc33c170814f159decaf197308e4d10b0a708c63f5961739"
+  },
+  "checks": [
+    {
+      "phase": "save",
+      "passed": true,
+      "log": "persistence-save.log",
+      "log_sha256": "15b5af144624f023e824c10d3854648b3ae7d13ff2e157ad94600d36f1107fb0"
+    },
+    {
+      "phase": "restart",
+      "passed": true,
+      "log": "persistence-restart.log",
+      "log_sha256": "e6b1a91439fa018a15e6689e2518212a2ff22e01922982b23f490f501046b069"
+    }
+  ]
+}

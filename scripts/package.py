@@ -6,7 +6,7 @@ import shutil
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "0.3.3"
+VERSION = "0.3.4"
 DIST = ROOT / "dist"
 DIST.mkdir(exist_ok=True)
 artifacts = []

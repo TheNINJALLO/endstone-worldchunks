@@ -1,0 +1,263 @@
+{
+  "schema_version": 1,
+  "project": "endstone-worldchunks",
+  "bds_package": "1.26.60.6",
+  "platform": "linux-x64",
+  "status": "offline-preparation-only",
+  "native_adapter_qualified": false,
+  "native_release_ready": false,
+  "endstone_runtime": null,
+  "executable": {
+    "filename": "bedrock_server",
+    "sha256": "ea16b541a448e07c337848d2c5f37321b706554b5216dd942f3f11e7a8ed2bad",
+    "size_bytes": 265500280,
+    "format": "ELF64",
+    "gnu_build_id": "52576b75b6af5a09a6bde582be804e29657dbbf3"
+  },
+  "qualification_required": [
+    "Obtain an Endstone SDK and runtime supporting BDS 1.26.60.6; record its actual version, commit, Python ABI, and binary identities",
+    "Review changed BDS functions, object layouts, virtual slots, and callsite contracts recorded in the prepared hook manifest",
+    "Relocate and fingerprint private Endstone functions against the new runtime; do not reuse the 0.11.14 addresses",
+    "Rebuild the native plugin and matching Python bridge against that exact SDK and Python ABI",
+    "Run disposable-server load, gameplay, persistence, restart, and clean-shutdown regressions before marking any platform qualified",
+    "Keep this preparation unpublished until native qualification passes and release is separately requested"
+  ],
+  "sites": [
+    {
+      "previous_address": "0x402d450",
+      "uses": [
+        "endstone-worldchunks/native_shared_mutex_lock"
+      ],
+      "method": "call graph with exact surrounding instruction alignment",
+      "review_required": true,
+      "normalized_function_identical": false,
+      "status": "mapped-offline",
+      "address": "0x41fe1d0",
+      "file_offset": 69194192,
+      "bytes": "41574156534883ec104889fb48893c24c644240801e8160200008b8388000000",
+      "call_evidence": [
+        {
+          "caller": "0x51a3910",
+          "new_caller": "0x53232a0",
+          "old_call": "0x51a3923",
+          "new_call": "0x53232b3",
+          "target": "0x41fe1d0",
+          "matched_instructions": 68
+        }
+      ]
+    },
+    {
+      "previous_address": "0x402d520",
+      "uses": [
+        "endstone-worldchunks/native_shared_mutex_unlock"
+      ],
+      "method": "call graph with exact surrounding instruction alignment",
+      "review_required": true,
+      "normalized_function_identical": false,
+      "status": "mapped-offline",
+      "address": "0x41fe2a0",
+      "file_offset": 69194400,
+      "bytes": "534889fbe857010000c78388000000000000004889dfe8750100004883c32848",
+      "call_evidence": [
+        {
+          "caller": "0x51a3910",
+          "new_caller": "0x53232a0",
+          "old_call": "0x51a397d",
+          "new_call": "0x532330d",
+          "target": "0x41fe2a0",
+          "matched_instructions": 68
+        },
+        {
+          "caller": "0x51a3910",
+          "new_caller": "0x53232a0",
+          "old_call": "0x51a39cd",
+          "new_call": "0x532335d",
+          "target": "0x41fe2a0",
+          "matched_instructions": 68
+        }
+      ]
+    },
+    {
+      "previous_address": "0x51a3830",
+      "uses": [
+        "endstone-worldchunks/embedded_chunk_view_dtor"
+      ],
+      "method": "instructions:224",
+      "review_required": true,
+      "normalized_function_identical": true,
+      "status": "mapped-offline",
+      "address": "0x53231c0",
+      "file_offset": 87171520,
+      "bytes": "534883ec104889fb4881c79000000048895c2408488d742408e8c2000000488d"
+    },
+    {
+      "previous_address": "0xbb5a640",
+      "uses": [
+        "endstone-worldchunks/player_get_ticking_offsets"
+      ],
+      "method": "RTTI vtable ordinal",
+      "review_required": true,
+      "normalized_function_identical": false,
+      "status": "mapped-offline",
+      "address": "0xbcf8110",
+      "file_offset": 198144272,
+      "bytes": "488bbff0010000488b07ffa030080000504883c708be01000000e88129090284"
+    },
+    {
+      "previous_address": "0xc8a3eb0",
+      "uses": [
+        "endstone-worldchunks/level_get_ticking_offsets"
+      ],
+      "method": "RTTI Level virtual table ordinal beyond 260 slots",
+      "review_required": true,
+      "normalized_function_identical": false,
+      "status": "mapped-offline",
+      "address": "0xce3a0e0",
+      "file_offset": 216240352,
+      "bytes": "488b8718060000c3cccccccccccccccc488b87180600004883c018c3cccccccc"
+    },
+    {
+      "previous_address": "0xc969e50",
+      "uses": [
+        "endstone-worldchunks/dimension_flush_chunk_garbage_collector"
+      ],
+      "method": "instructions:16",
+      "review_required": true,
+      "normalized_function_identical": true,
+      "status": "mapped-offline",
+      "address": "0xcf20f30",
+      "file_offset": 217186096,
+      "bytes": "4881c728030000e9d4750900cccccccc41574156534889fb4c8bb7980400004c"
+    },
+    {
+      "previous_address": "0xca0a750",
+      "uses": [
+        "endstone-worldchunks/main_get_existing"
+      ],
+      "method": "RTTI vtable ordinal",
+      "review_required": true,
+      "normalized_function_identical": false,
+      "status": "mapped-offline",
+      "address": "0xcfbbd10",
+      "file_offset": 217820432,
+      "bytes": "415653504889fb488d7e704889d6e82d8ffaff4885c074294989c60f57c00f11"
+    },
+    {
+      "previous_address": "0xca0aa80",
+      "uses": [
+        "endstone-worldchunks/main_create_new"
+      ],
+      "method": "RTTI vtable ordinal",
+      "review_required": true,
+      "normalized_function_identical": false,
+      "status": "mapped-offline",
+      "address": "0xcfbbf10",
+      "file_offset": 217820944,
+      "bytes": "4157415641554154534883ec204989d64989f74889fb488b76304885f6741248"
+    },
+    {
+      "previous_address": "0xca2cd50",
+      "uses": [
+        "endstone-worldchunks/dispatch_pending_chunk_tasks"
+      ],
+      "method": "direct call in independently mapped caller with matching argument instructions",
+      "review_required": true,
+      "normalized_function_identical": false,
+      "status": "mapped-offline",
+      "address": "0xcfdc9f0",
+      "file_offset": 217954800,
+      "bytes": "554157415641554154534881ece80200008974241c0fb6474884c00f85ac1d00",
+      "call_evidence": {
+        "old_caller": "0xca564b0",
+        "new_caller": "0xd005a30",
+        "new_call": "0xd005bb1",
+        "matched_instructions": 28
+      }
+    },
+    {
+      "previous_address": "0xca314e0",
+      "uses": [
+        "endstone-worldchunks/get_or_load"
+      ],
+      "method": "RTTI vtable ordinal",
+      "review_required": true,
+      "normalized_function_identical": false,
+      "status": "mapped-offline",
+      "address": "0xcfe0bc0",
+      "file_offset": 217971648,
+      "bytes": "554157415641554154534881ecb80000004489c589cb4989d44989fe488b0648"
+    },
+    {
+      "previous_address": "0xca341f0",
+      "uses": [
+        "endstone-worldchunks/chunk_view_source_ctor"
+      ],
+      "method": "instructions:192",
+      "review_required": true,
+      "normalized_function_identical": false,
+      "status": "mapped-offline",
+      "address": "0xcfe3560",
+      "file_offset": 217982304,
+      "bytes": "554157415641545389d54989f64889fb4c8b7e28488d053dfbd302488907488b"
+    },
+    {
+      "previous_address": "0xca35860",
+      "uses": [
+        "endstone-worldchunks/chunk_view_source_copy"
+      ],
+      "method": "ChunkViewSource RTTI vtable constructor references and full function alignment",
+      "review_required": true,
+      "normalized_function_identical": false,
+      "status": "mapped-offline",
+      "address": "0xcfe4950",
+      "file_offset": 217987408,
+      "bytes": "554157415641554154534881ec180200004989f54989ff488b8610020000488b"
+    },
+    {
+      "previous_address": "0xca3adb0",
+      "uses": [
+        "endstone-worldchunks/chunk_view_source_dtor"
+      ],
+      "method": "instructions:48",
+      "review_required": true,
+      "normalized_function_identical": true,
+      "status": "mapped-offline",
+      "address": "0xcfe96b0",
+      "file_offset": 218007216,
+      "bytes": "534889fb488d05bd82be024889074881c780000000e8f69a33f84889df5be93d"
+    },
+    {
+      "previous_address": "0xca3ade0",
+      "uses": [
+        "endstone-worldchunks/chunk_view_source_deleting_dtor"
+      ],
+      "method": "instructions:48",
+      "review_required": true,
+      "normalized_function_identical": true,
+      "status": "mapped-offline",
+      "address": "0xcfe96e0",
+      "file_offset": 218007264,
+      "bytes": "534889fb488d058d82be024889074881c780000000e8c69a33f84889dfe80e00"
+    },
+    {
+      "previous_address": "0xf2efae0",
+      "uses": [
+        "endstone-worldchunks/main_chunk_source_vtable_address_point"
+      ],
+      "method": "vtable:15MainChunkSource",
+      "review_required": true,
+      "normalized_function_identical": false,
+      "status": "mapped-offline",
+      "address": "0xfbcee98",
+      "file_offset": 264031896,
+      "bytes": "0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  ],
+  "source_reference": {
+    "bds": "1.26.52.3",
+    "endstone": "0.11.14",
+    "source_files": {
+      "src/native.cpp": "2410c0d97f7ecd78c229157a53819092bde6a460bb46838ebafe5869ebb8a0bd"
+    }
+  }
+}
