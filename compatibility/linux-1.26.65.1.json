@@ -1,0 +1,46 @@
+{
+  "platform": "linux-x86_64",
+  "endstone": "0.11.16",
+  "python_abi": "cp314",
+  "bds": "1.26.65.1",
+  "network_protocol": 2225,
+  "linux_archive_sha256": "4443e58064f5fa96f3464ab46c20cd89b631f7117e4c94d327f48c4eb64f9969",
+  "windows_archive_sha256": "c98b9824783b000b8a8d602e6f58467725316c8f635739b1e31998871995621e",
+  "bds_elf_sha256": "ae606d06f9803b4e56b6af7ae15fdc149736fb27096221a0ec082881e897b067",
+  "endstone_runtime_sha256": "3ca5f570e38de2faeba579187ba943c1afc6cfdc9f62762b8306ed728c1486d3",
+  "bds_rva": {
+    "chunk_view_source_ctor": "0xcfe3f50",
+    "chunk_view_source_copy": "0xcfe5340",
+    "chunk_view_source_dtor": "0xcfea0a0",
+    "chunk_view_source_deleting_dtor": "0xcfea0d0",
+    "embedded_chunk_view_dtor": "0x53236a0",
+    "main_get_existing": "0xcfbc700",
+    "main_create_new": "0xcfbc900",
+    "get_or_load": "0xcfe15b0",
+    "dispatch_pending_chunk_tasks": "0xcfdd3e0",
+    "dimension_flush_chunk_garbage_collector": "0xcf21920",
+    "native_shared_mutex_lock": "0x41fe6b0",
+    "native_shared_mutex_unlock": "0x41fe780",
+    "player_get_ticking_offsets": "0xbcf8b00",
+    "level_get_ticking_offsets": "0xce3aad0",
+    "main_chunk_source_vtable_address_point": "0xfbcfa18"
+  },
+  "runtime_rva": {
+    "dimension_get_handle": "0x1fc7b0",
+    "level_get_handle": "0x1fdb40",
+    "player_get_handle": "0x1767c0"
+  },
+  "sources": {
+    "endstone": "23cb5758bdc070888cb89ecd1541ef25c4305b5c",
+    "bedrock-protocol": "e15ec630d3d1fb983e8601571e54b59a886896c4",
+    "protocol-docs": "0db6185921974b5aba4a30af33a5eed842dd2cb9",
+    "protocol-dumper": "dc823fc11d69a8ed53774b1a84c99cf12e75b401",
+    "dwarf2cpp": "a7d9ff3d188c4a7d19920d76fa9ae3370fc75776",
+    "bedrock-server-data": "6a0233d17e397713c021e18ac0fbf309e06166c6",
+    "remote-dev": "f1c81922ec248dc715125af0f7c9216e13f84085"
+  },
+  "qualification_status": "pending-live-validation",
+  "runtime_configuration": {
+    "enable-script": true
+  }
+}

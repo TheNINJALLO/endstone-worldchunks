@@ -1,3 +1,13 @@
+# WorldChunks 0.3.5: Endstone 0.11.16 update
+
+The current source targets **Endstone 0.11.16**, **BDS 1.26.65.1 / runtime 26.65**, protocol **2225** and **CPython 3.14** on Linux and Windows x86-64. Binary hashes and native hook addresses have been refreshed independently for both platforms.
+
+Native builds and disposable-server qualification are pending. The update workflow builds the plugins and bundle wheels, checks cleanup and pinned chunks, verifies saved-block persistence across eviction and restart, and requires clean shutdown. Connected-player behavior remains outside that headless check.
+
+The platform profiles are [Linux](compatibility/linux-1.26.65.1.json) and [Windows](compatibility/windows-1.26.65.1.json). Build with `scripts/build.sh` or `scripts/build.ps1`, then build the matching wheel with `scripts/build_wheel.py`. The Windows profile targets LLVM 20 and the Visual Studio 2022 v143 runtime. Qualification evidence will be attached to the branch workflow; no 0.3.5 release has been published by this update.
+
+## Historical Endstone 0.11.15 baseline
+
 # WorldChunks
 
 > Endstone 0.11.15 release 0.3.4: This release includes verified Linux and Windows native artifacts and matching bundle wheels. The recorded validation defines the tested scope.

@@ -33,7 +33,7 @@ try:
         while True:
             log = (LAB / "windows-server.log").read_text(errors="replace")
             if (
-                "Unsupported BDS binary; expected Windows 1.26.60.6" in log
+                "Unsupported BDS binary; expected Windows 1.26.65.1" in log
                 and "Server started." in log
             ):
                 break
