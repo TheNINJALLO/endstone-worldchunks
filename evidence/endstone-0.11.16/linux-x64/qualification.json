@@ -1,0 +1,61 @@
+{
+  "platform": "linux",
+  "endstone": "0.11.16",
+  "bds": "1.26.65.1",
+  "enable_script": true,
+  "passed": true,
+  "connected_client_tested": false,
+  "checks": [
+    {
+      "test": "exact native hooks installed",
+      "passed": true
+    },
+    {
+      "test": "headless fixture has no players",
+      "passed": true
+    },
+    {
+      "test": "cleanup evicts unprotected ticking-area chunk",
+      "passed": true
+    },
+    {
+      "test": "cleanup preserves manual pin",
+      "passed": true
+    },
+    {
+      "test": "disabling cleanup restores vanilla residency",
+      "passed": true
+    },
+    {
+      "test": "saved block survives native eviction and reload",
+      "passed": true
+    },
+    {
+      "test": "native plugins shut down cleanly",
+      "passed": true
+    },
+    {
+      "test": "matching bundle wheel loads both plugins",
+      "passed": true
+    },
+    {
+      "test": "chunk policy survives restart",
+      "passed": true
+    },
+    {
+      "test": "saved block survives full server restart",
+      "passed": true
+    },
+    {
+      "test": "bundle plugins shut down cleanly",
+      "passed": true
+    }
+  ],
+  "artifacts": {
+    "endstone_worldchunks.so": "3efc6e90fe51bfb48eda153189dadf189501d15a77c11355feb0bf7b15ce23d7",
+    "endstone_worldchunks_optimizer.so": "cb7b91b6bab13731836ef3b76382bcd408b5987fcbf36ae7c4e8b2b476325461",
+    "endstone_worldchunks_bundle-0.3.5-py3-none-linux_x86_64.whl": "5ce28108ceb163365019867de0dd213f0a7482e1972c739219be4ec36a11a928"
+  },
+  "source_commit": "c8ccf8e66fc4bf6ee537c9aaa8d3646909b37d00",
+  "workflow": "https://github.com/TheNINJALLO/endstone-worldchunks/actions/runs/43986186975"
+}

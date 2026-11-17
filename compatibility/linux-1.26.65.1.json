@@ -39,8 +39,10 @@
     "bedrock-server-data": "6a0233d17e397713c021e18ac0fbf309e06166c6",
     "remote-dev": "f1c81922ec248dc715125af0f7c9216e13f84085"
   },
-  "qualification_status": "pending-live-validation",
+  "qualification_status": "qualified-headless",
   "runtime_configuration": {
     "enable-script": true
-  }
+  },
+  "qualification_evidence": "evidence/endstone-0.11.16/linux-x64/qualification.json",
+  "qualification_workflow": "https://github.com/TheNINJALLO/endstone-worldchunks/actions/runs/43986186975"
 }

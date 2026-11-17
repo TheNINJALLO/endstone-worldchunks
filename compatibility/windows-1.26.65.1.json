@@ -25,8 +25,10 @@
   "sources": {
     "endstone": "23cb5758bdc070888cb89ecd1541ef25c4305b5c"
   },
-  "qualification_status": "pending-live-validation",
+  "qualification_status": "qualified-headless",
   "runtime_configuration": {
     "enable-script": true
-  }
+  },
+  "qualification_evidence": "evidence/endstone-0.11.16/windows-x64/qualification.json",
+  "qualification_workflow": "https://github.com/TheNINJALLO/endstone-worldchunks/actions/runs/43986186975"
 }
