@@ -6,7 +6,7 @@ Both platforms passed native builds and disposable-server qualification: chunk e
 
 ## Install
 
-Download the matching platform artifact from [the successful branch workflow](https://github.com/TheNINJALLO/endstone-worldchunks/actions/runs/43986186975). This update is qualified and unpublished; no public v0.3.5 release was created.
+Download the matching platform artifact from the [stable v0.3.5 release](https://github.com/TheNINJALLO/endstone-worldchunks/releases/tag/v0.3.5).
 
 The qualified Linux binaries require glibc 2.38 or newer.
 

@@ -84,7 +84,7 @@
   "unqualified_platforms": {},
   "network_protocol": 2225,
   "native_release_ready": true,
-  "publication_status": "qualified-unpublished",
+  "publication_status": "stable",
   "runtime_configuration": {
     "enable-script": true
   },
