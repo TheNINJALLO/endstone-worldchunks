@@ -1,0 +1,212 @@
+{
+  "schema": 1,
+  "bds_package": "1.26.65.1",
+  "endstone": "0.11.16",
+  "platform": "windows-x64",
+  "endstone_commit": "23cb5758bdc070888cb89ecd1541ef25c4305b5c",
+  "native_adapter_qualified": false,
+  "images": {
+    "BdsOffsets": {
+      "filename": "bedrock_server.exe",
+      "sha256": "1dd638ca380b1f30156a814e7bf568932f04f977b504601817961f782609dc4e",
+      "size_bytes": 232650056,
+      "sites": [
+        {
+          "previous_address": "0xbf0160",
+          "address": "0xbf0160",
+          "method": "unique-normalized-function",
+          "old_function": "0xbf0160",
+          "new_function": "0xbf0160",
+          "offset": 0,
+          "size_bytes": 4880,
+          "file_offset": 12514656,
+          "bytes": "5541574156415541545657534881ecb8010000488dac248000000066440f7f9d"
+        },
+        {
+          "previous_address": "0xbf1820",
+          "address": "0xbf1820",
+          "method": "unique-normalized-function",
+          "old_function": "0xbf1820",
+          "new_function": "0xbf1820",
+          "offset": 0,
+          "size_bytes": 2811,
+          "file_offset": 12520480,
+          "bytes": "5541574156415541545657534881ecf8010000488dac248000000048c7857001"
+        },
+        {
+          "previous_address": "0xbff570",
+          "address": "0xbff570",
+          "method": "unique-normalized-function",
+          "old_function": "0xbff570",
+          "new_function": "0xbff570",
+          "offset": 0,
+          "size_bytes": 391,
+          "file_offset": 12577136,
+          "bytes": "415741565657534883ec304889ce488b79484885ff0f849a0000004c8d76484c"
+        },
+        {
+          "previous_address": "0x3149990",
+          "address": "0x314aba0",
+          "method": "unique-normalized-function",
+          "old_function": "0x3149990",
+          "new_function": "0x314aba0",
+          "offset": 0,
+          "size_bytes": 289,
+          "file_offset": 51683232,
+          "bytes": "56450fb60849bb25232284e49cf2cb4d31d948b8b3010000000100004c0fafc8"
+        },
+        {
+          "previous_address": "0x3149ce0",
+          "address": "0x314aef0",
+          "method": "unique-normalized-function",
+          "old_function": "0x3149ce0",
+          "new_function": "0x314aef0",
+          "offset": 0,
+          "size_bytes": 138,
+          "file_offset": 51684080,
+          "bytes": "5556574883ec50488d6c245048c745f8feffffff4c89c64889cf0fb645408844"
+        },
+        {
+          "previous_address": "0xbed420",
+          "address": "0xbed420",
+          "method": "unique-normalized-function",
+          "old_function": "0xbed420",
+          "new_function": "0xbed420",
+          "offset": 0,
+          "size_bytes": 4550,
+          "file_offset": 12503072,
+          "bytes": "5541574156415541545657534881ec08010000488dac248000000048c7858000"
+        },
+        {
+          "previous_address": "0xbe7710",
+          "address": "0xbe7710",
+          "method": "unique-normalized-function",
+          "old_function": "0xbe7710",
+          "new_function": "0xbe7710",
+          "offset": 0,
+          "size_bytes": 1010,
+          "file_offset": 12479248,
+          "bytes": "4157415641554154565755534883ec680fb64148a8010f857503000089d34889"
+        },
+        {
+          "previous_address": "0x7cb7f0",
+          "address": "0x7cb7f0",
+          "method": "unique-normalized-function",
+          "old_function": "0x7cb7f0",
+          "new_function": "0x7cb7f0",
+          "offset": 0,
+          "size_bytes": 32,
+          "file_offset": 8170480,
+          "bytes": "488b8158060000c3cccccccccccccccc488b81580600004883c018c3cccccccc"
+        },
+        {
+          "previous_address": "0x317ba90",
+          "address": "0x317cca0",
+          "method": "unique-normalized-function",
+          "old_function": "0x317ba90",
+          "new_function": "0x317cca0",
+          "offset": 0,
+          "size_bytes": 284,
+          "file_offset": 51888288,
+          "bytes": "41565657534883ec2889d74889ce488d050b1dd707488901488b898800000048"
+        },
+        {
+          "previous_address": "0xbed280",
+          "address": "0xbed280",
+          "method": "unique-normalized-function",
+          "old_function": "0xbed280",
+          "new_function": "0xbed280",
+          "offset": 0,
+          "size_bytes": 32,
+          "file_offset": 12502656,
+          "bytes": "488b49304885c97411488b01488b4008488b154922860a48ffe2c3cccccccccc"
+        },
+        {
+          "previous_address": "0xbed2a0",
+          "address": "0xbed2a0",
+          "method": "unique-normalized-function",
+          "old_function": "0xbed2a0",
+          "new_function": "0xbed2a0",
+          "offset": 0,
+          "size_bytes": 32,
+          "file_offset": 12502688,
+          "bytes": "488b49304885c97411488b01488b4010488b152922860a48ffe2b001c3cccccc"
+        },
+        {
+          "previous_address": "0xaeed9a0",
+          "address": "0xaeee9c0",
+          "method": "relocated-callback-table",
+          "old_functions": [
+            "0x317ba90",
+            "0xbed280",
+            "0xbed2a0"
+          ],
+          "new_functions": [
+            "0x317cca0",
+            "0xbed280",
+            "0xbed2a0"
+          ],
+          "file_offset": 183422912,
+          "bytes": "a0cc17430100000080d2be4001000000a0d2be4001000000a0ab144301000000"
+        },
+        {
+          "previous_address": "0xc02c00",
+          "address": "0xc02c00",
+          "method": "unique-normalized-function",
+          "old_function": "0xc02c00",
+          "new_function": "0xc02c00",
+          "offset": 0,
+          "size_bytes": 252,
+          "file_offset": 12591104,
+          "bytes": "555657534883ec38488d6c243048c74500feffffff89d74889ce488d05ff4120"
+        },
+        {
+          "previous_address": "0xae05e20",
+          "address": "0xae06e20",
+          "method": "relocated-callback-table",
+          "old_functions": [
+            "0xc02c00",
+            "0xbed280",
+            "0xbed2a0"
+          ],
+          "new_functions": [
+            "0xc02c00",
+            "0xbed280",
+            "0xbed2a0"
+          ],
+          "file_offset": 182473760,
+          "bytes": "002cc0400100000080d2be4001000000a0d2be40010000009025bf4001000000"
+        }
+      ]
+    },
+    "EndstoneOffsets": {
+      "filename": "endstone_runtime.dll",
+      "sha256": "b8ae7d5b5f902c14b48accb0a7584c79af22d7bb558759a3ca79dffa98c51e3a",
+      "size_bytes": 4653056,
+      "sites": [
+        {
+          "previous_address": "0x165880",
+          "address": "0x166780",
+          "method": "unique-normalized-function",
+          "old_function": "0x165880",
+          "new_function": "0x166780",
+          "offset": 0,
+          "size_bytes": 132,
+          "file_offset": 1465216,
+          "bytes": "56574883ec38488b51104885d27451837a0800744b8b42080f1f840000000000"
+        },
+        {
+          "previous_address": "0x93460",
+          "address": "0x942f0",
+          "method": "unique-normalized-function",
+          "old_function": "0x93460",
+          "new_function": "0x942f0",
+          "offset": 0,
+          "size_bytes": 32,
+          "file_offset": 603888,
+          "bytes": "488b4110c3cccccccccccccccccccccc564883ec404889d6488b0571b9390048"
+        }
+      ]
+    }
+  }
+}

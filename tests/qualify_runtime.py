@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import importlib.util
 import json
 import os
 from pathlib import Path
@@ -104,6 +105,11 @@ def main():
         source.extractall(server_path)
     executable = server_path / ("bedrock_server.exe" if WINDOWS else "bedrock_server")
     executable.chmod(0o755)
+    endstone_spec = importlib.util.find_spec("endstone")
+    runtime = Path(endstone_spec.origin).parent / ("endstone_runtime.dll" if WINDOWS else "libendstone_runtime.so")
+    subprocess.run([sys.executable, str(ROOT / "scripts/verify_native_binary.py"),
+                    "--profile", str(ROOT / f"compatibility/native-binary-profile-0.11.16-{PLATFORM}-x64.json"),
+                    "--bds", str(executable), "--endstone-runtime", str(runtime)], check=True)
     (server_path / "version.txt").write_text("26.65", encoding="utf-8")
     properties_path = server_path / "server.properties"
     properties = dict(line.split("=", 1) for line in properties_path.read_text().splitlines() if "=" in line and not line.startswith("#"))
