@@ -114,7 +114,7 @@ def main():
     properties_path = server_path / "server.properties"
     properties = dict(line.split("=", 1) for line in properties_path.read_text().splitlines() if "=" in line and not line.startswith("#"))
     properties.update({"server-name": "WorldChunks disposable qualification", "enable-script": "true",
-                       "online-mode": "false", "allow-cheats": "true", "enable-lan-visibility": "false",
+                       "online-mode": "false", "allow-list": "false", "allow-cheats": "true", "enable-lan-visibility": "false",
                        "level-name": "worldchunks-qualification", "level-seed": "42", "level-type": "FLAT",
                        "view-distance": "8", "tick-distance": "4", "max-players": "1",
                        "transport": "nethernet", "server-port": "19162", "server-portv6": "19163",
