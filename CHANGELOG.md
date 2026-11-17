@@ -1,3 +1,9 @@
+## 0.3.5 - Endstone 0.11.16 update
+
+- Target BDS 1.26.65.1 / runtime 26.65 and the exact Endstone 0.11.16 SDK/runtime.
+- Refresh native binary identities, private hook addresses and instruction fingerprints from verified upstream inputs.
+- Pass Linux/Windows native and wheel qualification, including cleanup, pin protection, saved-block recovery, policy/data restart persistence and clean shutdown; retain historical profiles.
+
 # Changelog
 
 ## 0.3.4 - 2026-10-28

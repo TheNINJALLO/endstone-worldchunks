@@ -1,0 +1,100 @@
+name: Native update build and qualification
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: worldchunks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  native:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-24.04
+            platform: linux_x86_64
+            build: build
+          - os: windows-2022
+            platform: win_amd64
+            build: build-windows
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+      - name: Install build and runtime dependencies
+        run: python -m pip install conan==2.31.1 cmake ninja endstone==0.11.16
+      - name: Configure Conan remotes
+        run: |
+          conan remote add endstone https://conan.cloudsmith.io/endstone/conan/ --force
+          conan remote add conancenter https://center2.conan.io --force
+      - name: Install Linux Clang 20
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget gnupg lsb-release software-properties-common
+          wget -q https://apt.llvm.org/llvm.sh -O /tmp/llvm.sh
+          echo '03878e08f47b66cc95bc4b544b0db3c6d9ce8d60e6cf2492ae357984330a9eae  /tmp/llvm.sh' | sha256sum -c -
+          sudo bash /tmp/llvm.sh 20
+          sudo apt-get install -y libc++-20-dev libc++abi-20-dev ninja-build
+      - name: Install Windows LLVM 20 and locate Visual Studio
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $installer = Join-Path $env:RUNNER_TEMP LLVM-20.1.8-win64.exe
+          Invoke-WebRequest https://github.com/llvm/llvm-project/releases/download/llvmorg-20.1.8/LLVM-20.1.8-win64.exe -OutFile $installer
+          if ((Get-FileHash $installer -Algorithm SHA256).Hash.ToLower() -ne '3197846a2b19063687dd56e93e34cd941e3548d907f23a6131571321bdf9fe7b') { throw 'LLVM installer checksum mismatch' }
+          $llvmRoot = Join-Path $env:RUNNER_TEMP llvm-20
+          $process = Start-Process -FilePath $installer -ArgumentList @('/S', "/D=$llvmRoot") -WindowStyle Hidden -Wait -PassThru
+          if ($process.ExitCode) { throw 'LLVM installation failed' }
+          "LLVM_BIN=$llvmRoot\bin" >> $env:GITHUB_ENV
+          "$llvmRoot\bin" >> $env:GITHUB_PATH
+          $vswhere = Join-Path ${env:ProgramFiles(x86)} 'Microsoft Visual Studio\Installer\vswhere.exe'
+          $vsRoot = & $vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
+          "VS_ROOT=$vsRoot" >> $env:GITHUB_ENV
+      - name: Build Linux plugins and policy tests
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          bash scripts/build.sh
+          clang++-20 -std=c++20 -Iinclude tests/optimizer_policy.cpp -o build/optimizer_policy_test
+          clang++-20 -std=c++20 -Iinclude tests/protection_policy.cpp -o build/protection_policy_test
+          build/optimizer_policy_test
+          build/protection_policy_test
+      - name: Build Windows plugins
+        if: runner.os == 'Windows'
+        shell: cmd
+        run: |
+          call "%VS_ROOT%\Common7\Tools\VsDevCmd.bat" -arch=x64 -host_arch=x64
+          set "PATH=%LLVM_BIN%;%PATH%"
+          powershell -NoProfile -ExecutionPolicy Bypass -File scripts\build.ps1
+      - name: Run Python tests and build the platform wheel
+        run: |
+          python -m unittest discover -s tests -v
+          python scripts/build_wheel.py ${{ matrix.platform }}
+      - name: Qualify raw plugins, bundle wheel, cleanup and persisted restart
+        run: >-
+          python tests/qualify_runtime.py --build-dir ${{ matrix.build }}
+          --wheel dist/endstone_worldchunks_bundle-0.3.5-py3-none-${{ matrix.platform }}.whl
+          --server "${{ runner.temp }}/worldchunks-qualification"
+          --output evidence/endstone-0.11.16/${{ matrix.platform }}/qualification.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: worldchunks-0.3.5-${{ matrix.platform }}
+          path: |
+            build/endstone_worldchunks*.so
+            build-windows/endstone_worldchunks*.dll
+            dist/*.whl
+            evidence/endstone-0.11.16/**/*.json
+            ${{ runner.temp }}/worldchunks-qualification/*server.log
+          if-no-files-found: warn

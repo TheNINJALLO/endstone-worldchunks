@@ -1,0 +1,214 @@
+{
+  "schema": 1,
+  "bds_package": "1.26.65.1",
+  "endstone": "0.11.16",
+  "platform": "linux-x64",
+  "endstone_commit": "23cb5758bdc070888cb89ecd1541ef25c4305b5c",
+  "native_adapter_qualified": false,
+  "images": {
+    "BdsOffsets": {
+      "filename": "bedrock_server",
+      "sha256": "ae606d06f9803b4e56b6af7ae15fdc149736fb27096221a0ec082881e897b067",
+      "size_bytes": 265503224,
+      "sites": [
+        {
+          "previous_address": "0x41fe1d0",
+          "address": "0x41fe6b0",
+          "method": "unique-normalized-function",
+          "old_function": "0x41fe1d0",
+          "new_function": "0x41fe6b0",
+          "offset": 0,
+          "size_bytes": 160,
+          "file_offset": 69195440,
+          "bytes": "41574156534883ec104889fb48893c24c644240801e8160200008b8388000000"
+        },
+        {
+          "previous_address": "0x41fe2a0",
+          "address": "0x41fe780",
+          "method": "unique-normalized-function",
+          "old_function": "0x41fe2a0",
+          "new_function": "0x41fe780",
+          "offset": 0,
+          "size_bytes": 48,
+          "file_offset": 69195648,
+          "bytes": "534889fbe857010000c78388000000000000004889dfe8750100004883c32848"
+        },
+        {
+          "previous_address": "0x53231c0",
+          "address": "0x53236a0",
+          "method": "unique-normalized-function",
+          "old_function": "0x53231c0",
+          "new_function": "0x53236a0",
+          "offset": 0,
+          "size_bytes": 224,
+          "file_offset": 87172768,
+          "bytes": "534883ec104889fb4881c79000000048895c2408488d742408e8c2000000488d"
+        },
+        {
+          "previous_address": "0xbcf8110",
+          "address": "0xbcf8b00",
+          "method": "unique-normalized-function",
+          "old_function": "0xbcf8110",
+          "new_function": "0xbcf8b00",
+          "offset": 0,
+          "size_bytes": 16,
+          "file_offset": 198146816,
+          "bytes": "488bbff0010000488b07ffa030080000504883c708be01000000e8612a090284"
+        },
+        {
+          "previous_address": "0xce3a0e0",
+          "address": "0xce3aad0",
+          "method": "unique-normalized-function",
+          "old_function": "0xce3a0e0",
+          "new_function": "0xce3aad0",
+          "offset": 0,
+          "size_bytes": 16,
+          "file_offset": 216242896,
+          "bytes": "488b8718060000c3cccccccccccccccc488b87180600004883c018c3cccccccc"
+        },
+        {
+          "previous_address": "0xcf20f30",
+          "address": "0xcf21920",
+          "method": "unique-normalized-function",
+          "old_function": "0xcf20f30",
+          "new_function": "0xcf21920",
+          "offset": 0,
+          "size_bytes": 16,
+          "file_offset": 217188640,
+          "bytes": "4881c728030000e9d4750900cccccccc41574156534889fb4c8bb7980400004c"
+        },
+        {
+          "previous_address": "0xcfbbd10",
+          "address": "0xcfbc700",
+          "method": "unique-normalized-function",
+          "old_function": "0xcfbbd10",
+          "new_function": "0xcfbc700",
+          "offset": 0,
+          "size_bytes": 96,
+          "file_offset": 217822976,
+          "bytes": "415653504889fb488d7e704889d6e82d8ffaff4885c074294989c60f57c00f11"
+        },
+        {
+          "previous_address": "0xcfbbf10",
+          "address": "0xcfbc900",
+          "method": "unique-normalized-function",
+          "old_function": "0xcfbbf10",
+          "new_function": "0xcfbc900",
+          "offset": 0,
+          "size_bytes": 320,
+          "file_offset": 217823488,
+          "bytes": "4157415641554154534883ec204989d64989f74889fb488b76304885f6741248"
+        },
+        {
+          "previous_address": "0xcfdc9f0",
+          "address": "0xcfdd3e0",
+          "method": "unique-normalized-function",
+          "old_function": "0xcfdc9f0",
+          "new_function": "0xcfdd3e0",
+          "offset": 0,
+          "size_bytes": 8336,
+          "file_offset": 217957344,
+          "bytes": "554157415641554154534881ece80200008974241c0fb6474884c00f85ac1d00"
+        },
+        {
+          "previous_address": "0xcfe0bc0",
+          "address": "0xcfe15b0",
+          "method": "unique-normalized-function",
+          "old_function": "0xcfe0bc0",
+          "new_function": "0xcfe15b0",
+          "offset": 0,
+          "size_bytes": 4112,
+          "file_offset": 217974192,
+          "bytes": "554157415641554154534881ecb80000004489c589cb4989d44989fe488b0648"
+        },
+        {
+          "previous_address": "0xcfe3560",
+          "address": "0xcfe3f50",
+          "method": "unique-normalized-function",
+          "old_function": "0xcfe3560",
+          "new_function": "0xcfe3f50",
+          "offset": 0,
+          "size_bytes": 464,
+          "file_offset": 217984848,
+          "bytes": "554157415641545389d54989f64889fb4c8b7e28488d05cdfcd302488907488b"
+        },
+        {
+          "previous_address": "0xcfe4950",
+          "address": "0xcfe5340",
+          "method": "unique-normalized-function",
+          "old_function": "0xcfe4950",
+          "new_function": "0xcfe5340",
+          "offset": 0,
+          "size_bytes": 2704,
+          "file_offset": 217989952,
+          "bytes": "554157415641554154534881ec180200004989f54989ff488b8610020000488b"
+        },
+        {
+          "previous_address": "0xcfe96b0",
+          "address": "0xcfea0a0",
+          "method": "unique-normalized-function",
+          "old_function": "0xcfe96b0",
+          "new_function": "0xcfea0a0",
+          "offset": 0,
+          "size_bytes": 48,
+          "file_offset": 218009760,
+          "bytes": "534889fb488d054d84be024889074881c780000000e8e69533f84889df5be93d"
+        },
+        {
+          "previous_address": "0xcfe96e0",
+          "address": "0xcfea0d0",
+          "method": "unique-normalized-function",
+          "old_function": "0xcfe96e0",
+          "new_function": "0xcfea0d0",
+          "offset": 0,
+          "size_bytes": 48,
+          "file_offset": 218009808,
+          "bytes": "534889fb488d051d84be024889074881c780000000e8b69533f84889dfe80e00"
+        },
+        {
+          "previous_address": "0xfbcee98",
+          "address": "0xfbcfa18",
+          "method": "rtti-vtable",
+          "type_name": "15MainChunkSource",
+          "offset_to_top": 0,
+          "file_offset": 264034840,
+          "bytes": "0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ]
+    },
+    "EndstoneOffsets": {
+      "filename": "libendstone_runtime.so",
+      "sha256": "3ca5f570e38de2faeba579187ba943c1afc6cfdc9f62762b8306ed728c1486d3",
+      "size_bytes": 84188657,
+      "sites": [
+        {
+          "previous_address": "0x175ca0",
+          "address": "0x1767c0",
+          "method": "named-symbol",
+          "symbol": "_ZNK8endstone4core17EndstoneActorBaseINS_6PlayerE6PlayerE9getHandleEv",
+          "offset": 0,
+          "file_offset": 1533888,
+          "bytes": "415653504883c718c644240701488d742407e8a961fdff4885c074084883c408"
+        },
+        {
+          "previous_address": "0x1fbfd0",
+          "address": "0x1fc7b0",
+          "method": "named-symbol",
+          "symbol": "_ZNK8endstone4core17EndstoneDimension9getHandleEv",
+          "offset": 0,
+          "file_offset": 2082736,
+          "bytes": "415653504889fb488b7f104885ff745a488b47084883f8ff7450488b4708e84d"
+        },
+        {
+          "previous_address": "0x1fd360",
+          "address": "0x1fdb40",
+          "method": "named-symbol",
+          "symbol": "_ZNK8endstone4core13EndstoneLevel9getHandleEv",
+          "offset": 0,
+          "file_offset": 2087744,
+          "bytes": "488b4710c366662e0f1f840000000000be10000000e9e6f5eeff660f1f440000"
+        }
+      ]
+    }
+  }
+}

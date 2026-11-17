@@ -1,33 +1,25 @@
-# WorldChunks
+# WorldChunks 0.3.5
 
-> Endstone 0.11.15 release 0.3.4: This release includes verified Linux and Windows native artifacts and matching bundle wheels. The recorded validation defines the tested scope.
+Chunk control and automatic cleanup for **Endstone 0.11.16**, **BDS 1.26.65.1 / runtime 26.65**, protocol **2225**, and **CPython 3.14** on Linux and Windows x86-64. Native hashes and hook addresses are pinned to this exact pair.
 
-Chunk control and automatic cleanup for Endstone.
-
-WorldChunks can unload chunks inside a player's normal ticking area, stop them from loading again, keep selected chunks loaded, and reduce player simulation distance below Bedrock's four-chunk minimum. The companion optimizer can handle cleanup around online players on a timer or when TPS drops.
-
-**New in 0.3.1:** builds default to Bedrock's normal chunk retention and simulation. Forced cleanup and reduced simulation are opt-in because they can interrupt add-on structure generation and ticking-area jobs.
-
-Version 0.3.4 targets **Endstone 0.11.15 and Bedrock Dedicated Server 1.26.60.6**. Native hooks are tied to a specific server build; see the [Linux](compatibility/linux-1.26.60.6.json) and [Windows](compatibility/windows-1.26.60.6.json) compatibility manifests. Network protocol is **2225**. Linux and Windows native plugins and bundle wheels passed live cleanup, protection, persistence, restart, and clean-shutdown qualification with the default `enable-script=true`.
+Both platforms passed native builds and disposable-server qualification: chunk eviction, manual pin protection, vanilla restoration, saved-block recovery, matching bundle startup, restart persistence and clean shutdown. The checks used `enable-script=true` and no connected players. See the [successful workflow](https://github.com/TheNINJALLO/endstone-worldchunks/actions/runs/43986186975) and [qualification profile](compatibility/bds-1.26.65.json).
 
 ## Install
 
-Download the verified Linux and Windows artifacts from [WorldChunks 0.3.4](https://github.com/TheNINJALLO/endstone-worldchunks/releases/tag/v0.3.4). The published [WorldChunks 0.3.2](https://github.com/TheNINJALLO/endstone-worldchunks/releases/tag/v0.3.2) remains the release for Endstone 0.11.13. Published 0.3.0 files target Endstone 0.11.11.
+Download the matching platform artifact from the [stable v0.3.5 release](https://github.com/TheNINJALLO/endstone-worldchunks/releases/tag/v0.3.5).
 
-Use Python 3.14 with `endstone==0.11.15`. The Linux binaries require glibc 2.34 or newer. Choose one installation format:
+The qualified Linux binaries require glibc 2.38 or newer.
+
+Use Python 3.14 with `endstone==0.11.16`. Choose either the two native files or the matching wheel:
 
 | Platform | Native files | Wheel containing both plugins |
 | --- | --- | --- |
-| Linux x86-64 | `endstone_worldchunks.so` and `endstone_worldchunks_optimizer.so` | `endstone_worldchunks_bundle-0.3.4-py3-none-linux_x86_64.whl` |
-| Windows x86-64 | Source builds only; live qualification pending | No Windows artifacts published in 0.3.4 |
+| Linux x86-64 | `endstone_worldchunks.so`, `endstone_worldchunks_optimizer.so` | `endstone_worldchunks_bundle-0.3.5-py3-none-linux_x86_64.whl` |
+| Windows x86-64 | `endstone_worldchunks.dll`, `endstone_worldchunks_optimizer.dll` | `endstone_worldchunks_bundle-0.3.5-py3-none-win_amd64.whl` |
 
-Copy either the two native files or the matching wheel into `plugins/`.
-Remove older WorldChunks files before switching formats or updating the wheel.
-Keep the `worldchunks` and `worldchunks_optimizer` configuration folders.
+Copy your chosen format into `plugins/`, replacing older WorldChunks binaries or wheels while preserving the configuration folders. Restart and run `/wc status` and `/wco status`. The optimizer requires WorldChunks. `/wco reload` reloads configuration only.
 
-Restart the server and run `/wc status` and `/wco status`. The optimizer needs WorldChunks; WorldChunks also works on its own.
-
-The native plugin must load during startup. Restart the server when updating either binary. `/wco reload` reloads the optimizer's settings only.
+Build from source with `scripts/build.sh` or `scripts/build.ps1`, then `scripts/build_wheel.py`. The Windows profile uses LLVM 20 and the v144 runtime toolset installed on the build runner. The [previous release documentation](docs/history/endstone-0.11.15.md) and older profiles are preserved.
 
 ## Automatic cleanup
 
@@ -86,7 +78,7 @@ The [command reference](docs/commands.md) lists every command and permission. Th
 
 See [building and packaging](docs/building.md), [native implementation](docs/native-design.md), and [test results](docs/validation.md).
 
-The 0.3.4 Linux native build passed disposable-server checks for cleanup, saved blocks, protection and TPS-triggered cleanup on Endstone 0.11.15. Twenty optimizer policy checks, twenty protection policy checks and seven Python compatibility tests passed. Windows native compilation and runtime identity mapping passed, but its CPython 3.14 runtime fixture timed out during startup. Evidence is under `evidence/endstone-0.11.15/`. The earlier 0.3.2 Linux/Windows and connected-client results remain historical evidence; no connected-client session was used for this update.
+Linux and Windows native builds, matching bundle wheels, and all 11 headless runtime checks passed on Endstone 0.11.16 / BDS 1.26.65.1 with `enable-script=true`. Each platform passed chunk eviction, manual pin protection, vanilla restoration, saved-block eviction/reload, wheel startup, policy and saved-block restart persistence, and clean shutdown. Connected-player behavior was not retested. Evidence is under `evidence/endstone-0.11.16/`; older evidence remains historical.
 
 ## License
 
