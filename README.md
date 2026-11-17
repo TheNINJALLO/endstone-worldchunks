@@ -8,6 +8,8 @@ Both platforms passed native builds and disposable-server qualification: chunk e
 
 Download the matching platform artifact from [the successful branch workflow](https://github.com/TheNINJALLO/endstone-worldchunks/actions/runs/43986186975). This update is qualified and unpublished; no public v0.3.5 release was created.
 
+The qualified Linux binaries require glibc 2.38 or newer.
+
 Use Python 3.14 with `endstone==0.11.16`. Choose either the two native files or the matching wheel:
 
 | Platform | Native files | Wheel containing both plugins |
