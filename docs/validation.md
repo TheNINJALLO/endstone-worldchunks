@@ -1,8 +1,18 @@
+# Endstone 0.11.16 / BDS 1.26.65.1 qualification
+
+WorldChunks **0.3.5** passed native compilation and 11 headless runtime checks on each of Linux and Windows with **CPython 3.14**, protocol **2225**, and `enable-script=true`. The checks cover hook installation, chunk eviction, manual pin protection, vanilla restoration, saved-block eviction/reload, matching bundle startup, policy/data restart persistence and clean shutdown. Ten Python tests and the Linux optimizer/protection policy suites also passed.
+
+Reports and exact artifact hashes: `evidence/endstone-0.11.16/{linux-x64,windows-x64}/qualification.json`. [Successful workflow](https://github.com/TheNINJALLO/endstone-worldchunks/actions/runs/43986186975).
+
+No connected client was used. The earlier protection lease, TPS-trigger and connected-client records below describe their original versions and were not rerun in full for this update.
+
+## Historical qualification
+
 # Minecraft 26.60 / Endstone 0.11.15 qualification - 2026-10-28
 
 WorldChunks **0.3.4** targets BDS **1.26.60.6**, protocol **2225**, CPython **3.14**. Linux and Windows native and bundle-wheel deployments passed cleanup, restoration, saved-block, protection overlap/expiry, save/query/resume, and persisted-block restart checks. Each deployment stopped cleanly. Twenty optimizer-policy checks, twenty protection-policy checks, and ten isolated Python tests passed. No connected-player session was used. Qualification uses `enable-script=true`.
 
-Current evidence: `evidence/endstone-0.11.15/`. Earlier records below retain their original targets and scope.
+Historical evidence: `evidence/endstone-0.11.15/`. Earlier records below retain their original targets and scope.
 
 ---
 

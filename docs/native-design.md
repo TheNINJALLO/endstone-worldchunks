@@ -1,6 +1,6 @@
 # Native adapter
 
-This adapter is specific to the supplied Linux BDS 1.26.60.6 executable and the Endstone 0.11.15 CPython 3.14 Linux runtime. Both complete files must match the SHA256 values in `compatibility/linux-1.26.60.6.json` before any hook is prepared. ASLR is handled by resolving module load addresses. Another Python wheel can have different private function addresses even with the same Endstone version.
+This adapter is specific to the verified BDS 1.26.65.1 executables and Endstone 0.11.16 CPython 3.14 runtimes on Linux and Windows. Both complete files must match the SHA256 values in `compatibility/linux-1.26.65.1.json` or `compatibility/windows-1.26.65.1.json` before any hook is prepared. ASLR is handled by resolving module load addresses. Another Python wheel can have different private function addresses even with the same Endstone version.
 
 ## Ownership and unload
 
@@ -16,7 +16,7 @@ An unload rule blocks `MainChunkSource::getExistingChunk`, `createNewChunk`, and
 
 Shutdown releases plugin ownership, then flushes each Dimension's chunk garbage collector (virtual slot 7 on Linux / 6 on Windows), the chunk source's thread batch (slot 29), and pending discarded writes (slot 28) before removing hooks. This ordering was established on Endstone 0.11.11: deferred chunk disposal during the later Level destructor can emit an unload event after Endstone's server singleton has been destroyed. A GDB trace reproduced that null-server access before the explicit flush was added.
 
-New distant chunks require more than a single `getOrLoadChunk` call. While a pinned center is unfinished, the adapter requests and retains a thirteen-by-thirteen neighborhood, retries the native loading pipeline each tick, and dispatches pending chunk tasks using the same native routine as the ChunkView fetch callback (`0xcfdc9f0`, boolean argument false). The center advances through terrain, decoration, replacement-data checks and lighting. Once state 11 is reached, the temporary neighborhood is released. Denied neighbors remain denied and can prevent generation from completing; `status.pending_generation` exposes unfinished pins. Releasing a pin also releases its temporary neighborhood.
+New distant chunks require more than a single `getOrLoadChunk` call. While a pinned center is unfinished, the adapter requests and retains a thirteen-by-thirteen neighborhood, retries the native loading pipeline each tick, and dispatches pending chunk tasks using the same native routine as the ChunkView fetch callback (`0xcfdd3e0`, boolean argument false). The center advances through terrain, decoration, replacement-data checks and lighting. Once state 11 is reached, the temporary neighborhood is released. Denied neighbors remain denied and can prevent generation from completing; `status.pending_generation` exposes unfinished pins. Releasing a pin also releases its temporary neighborhood.
 
 ## Simulation radius
 
@@ -56,9 +56,9 @@ Clang 20 and libc++ are essential: shared pointers and vectors cross the ABI. Th
 
 ## Repository research
 
-- [endstone](https://github.com/EndstoneMC/endstone/tree/v0.11.13): plugin API, startup lifecycle, scheduler, public loaded-chunk enumeration, native chunk-source declarations, and wrapper implementations.
+- [endstone](https://github.com/EndstoneMC/endstone/tree/v0.11.16): plugin API, startup lifecycle, scheduler, public loaded-chunk enumeration, native chunk-source declarations, and wrapper implementations.
 - [bedrock-protocol](https://github.com/EndstoneMC/bedrock-protocol): versioned codecs and chunk packet schemas. Protocol 2193 matches this server generation.
-- [protocol-docs](https://github.com/EndstoneMC/protocol-docs): documents the supplied 1.26.60.6 release. RequestChunkRadius (69), ChunkRadiusUpdated (70), and NetworkChunkPublisherUpdate (121) concern network visibility and publication; they do not release native chunk owners.
+- [protocol-docs](https://github.com/EndstoneMC/protocol-docs): documents the native protocols; the verified 1.26.65.1 target uses protocol 2225. RequestChunkRadius (69), ChunkRadiusUpdated (70), and NetworkChunkPublisherUpdate (121) concern network visibility and publication; they do not release native chunk owners.
 - [protocol-dumper](https://github.com/EndstoneMC/protocol-dumper): explains the cereal/EnTT reflection pipeline behind generated packet schemas. It is a schema discovery tool, not an ownership controller; it is not preloaded into the test server.
 - [dwarf2cpp](https://github.com/EndstoneMC/dwarf2cpp): requires DWARF debug information. The supplied retail Linux ELF has no DWARF sections, so full automatic header recovery is unavailable. RTTI, vtables, unwind function boundaries, Endstone runtime symbols, disassembly, and live tests were used instead.
 - [bedrock-server-data](https://github.com/EndstoneMC/bedrock-server-data): release metadata and platform archive hashes. Both supplied ZIP files were identified and hashed, and each platform has its own verified ABI adapter.
@@ -69,7 +69,7 @@ Exact repository revisions are recorded in the compatibility manifest. The resea
 ## Windows adapter
 
 The Windows build checks its own complete executable and runtime hashes in
-`compatibility/windows-1.26.60.6.json`. It uses the MSVC C++ ABI, including the
+`compatibility/windows-1.26.65.1.json`. It uses the MSVC C++ ABI, including the
 hidden return buffer for shared pointers and the callee-owned value argument
 passed to `setLevelChunk`.
 
