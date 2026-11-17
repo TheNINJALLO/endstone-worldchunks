@@ -170,11 +170,13 @@ def main():
         server.start()
         check("matching bundle wheel loads both plugins", True)
         check("chunk policy survives restart", server.command("wc status --json")["simulation_radius_cap"] == 2)
+        server.command("tickingarea add circle 8 0 8 2 api_restart true", "Added ticking area")
         server.command("wc load Overworld 2 0 --json")
         server.wait(lambda: inspect(2).get("state") == 11)
         server.command("execute if block 40 20 8 emerald_block run say RESTART_BLOCK_VERIFIED", "RESTART_BLOCK_VERIFIED")
         check("saved block survives full server restart", True)
         server.command("wc release Overworld 2 0 --json")
+        server.command("tickingarea remove api_restart", "Removed")
         server.stop()
         check("bundle plugins shut down cleanly", True)
     finally:
