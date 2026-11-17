@@ -1,6 +1,6 @@
 # Building WorldChunks
 
-Build each platform against the pinned Endstone 0.11.13 SDK. The native adapter
+Build each platform against the pinned Endstone 0.11.16 SDK. The native adapter
 also checks the BDS and Endstone runtime binaries at startup; a successful build
 does not make another server version compatible.
 
@@ -20,7 +20,7 @@ exists at `research/endstone`, it is used as the SDK source instead.
 
 ## Windows x86-64
 
-Install Visual Studio 2022 Build Tools with the C++ workload and Windows SDK,
+Install Visual Studio C++ Build Tools with the v144 runtime toolset and Windows SDK,
 LLVM 20 (including clang-cl and lld-link), Python 3.14, CMake, Ninja, and Conan 2.
 From an x64 developer PowerShell with those tools on PATH:
 
@@ -63,7 +63,7 @@ clang++ -std=c++20 -Iinclude tests/optimizer_policy.cpp -o optimizer_policy
 `scripts/lab_server.py` runs a disposable flat server. On Linux it uses
 `/opt/worldchunks-server`; on Windows it uses `lab/windows-server`. Place the
 matching supplied server ZIP in the project root and launch the script using a
-Python 3.14 environment with `endstone==0.11.13`. Add `--wheel` to test a wheel
+Python 3.14 environment with `endstone==0.11.16`. Add `--wheel` to test a wheel
 installation. Linux test ports are 19142/19144; Windows ports are 19152/19154.
 These are separate from the normal Bedrock ports.
 
