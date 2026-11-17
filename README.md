@@ -4,7 +4,7 @@ The current source targets **Endstone 0.11.16**, **BDS 1.26.65.1 / runtime 26.65
 
 Native builds and disposable-server qualification are pending. The update workflow builds the plugins and bundle wheels, checks cleanup and pinned chunks, verifies saved-block persistence across eviction and restart, and requires clean shutdown. Connected-player behavior remains outside that headless check.
 
-The platform profiles are [Linux](compatibility/linux-1.26.65.1.json) and [Windows](compatibility/windows-1.26.65.1.json). Build with `scripts/build.sh` or `scripts/build.ps1`, then build the matching wheel with `scripts/build_wheel.py`. The Windows profile targets LLVM 20 and the Visual Studio 2022 v143 runtime. Qualification evidence will be attached to the branch workflow; no 0.3.5 release has been published by this update.
+The platform profiles are [Linux](compatibility/linux-1.26.65.1.json) and [Windows](compatibility/windows-1.26.65.1.json). Build with `scripts/build.sh` or `scripts/build.ps1`, then build the matching wheel with `scripts/build_wheel.py`. The Windows profile targets LLVM 20 and the v144 runtime toolset installed on the Windows build runner. Qualification evidence will be attached to the branch workflow; no 0.3.5 release has been published by this update.
 
 ## Historical Endstone 0.11.15 baseline
 
